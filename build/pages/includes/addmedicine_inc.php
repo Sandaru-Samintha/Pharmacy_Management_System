@@ -28,8 +28,7 @@
             exit();
         }
 
-        $sql= "INSERT INTO medicines(medicinename,brandname,batchnumber,medicinetype,category,manufacturedate,expirydate,suppliername,quantity,purchaseprice,sellingprice) VALUES ('$medicinename','$brandname','$batchnumber','$medicinetype','$category','$manufacturedate',
-        '$expirydate','$suppliername','$quantity','$purchaseprice','$sellingprice')";
+        $sql= "INSERT INTO medicines(medicinename,brandname,batchnumber,medicinetype,category,manufacturedate,expirydate,suppliername,quantity,purchaseprice,sellingprice) VALUES ('$medicinename','$brandname','$batchnumber','$medicinetype','$category','$manufacturedate','$expirydate','$suppliername','$quantity','$purchaseprice','$sellingprice')";
 
 
         $result=mysqli_query($connect,$sql);

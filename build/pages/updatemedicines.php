@@ -1,10 +1,11 @@
 <?php
 
+    session_start();
     include_once "includes/dbconnection.php";
 
     if(isset($_GET['id']))
     {
-        $id=$_GET['id'];
+        $id = $_GET['id'];
         //echo  $id;
     }
 ?>
@@ -68,9 +69,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page"> Medicine Details</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Update Medicine </li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize"> Medicine Details</h6>
+            <h6 class="mb-0 font-bold capitalize">Update Medicine </h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -181,11 +182,11 @@
                     </div>
                     </a>
                 </li>
-                </ul>
+              </ul>
             </li>
             </ul>
         </div>
-        </div>
+      </div>
     </nav>
 
     <!-- end Navbar -->
@@ -195,9 +196,30 @@
         <!--  Medicines Detail -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full  max-w-full px-3">
+            <?php
+                  if(isset($_SESSION['emptyset'])) 
+                  {
+                      echo $_SESSION['emptyset'];
+                      unset($_SESSION['emptyset']);
+                  }
+                ?>
+                <?php
+                  if(isset($_SESSION['emptyset'])) 
+                  {
+                      echo $_SESSION['emptyset'];
+                      unset($_SESSION['emptyset']);
+                  }
+                ?>
+                <?php
+                  if(isset($_SESSION['emptyset'])) 
+                  {
+                      echo $_SESSION['emptyset'];
+                      unset($_SESSION['emptyset']);
+                  }
+                ?>
                 <div class="relative flex flex-col  min-w-0 h-full mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border ">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6> Medicine Details Form</h6>
+                        <h6>Update Medicine Form</h6>
                     </div>
                         <div class="flex max-h-screen">
                             <div class="m-auto">
@@ -205,7 +227,7 @@
                                     <div class="flex-auto px-0 pt-0 pb-2">
                                         <div class="p-0 overflow-x-auto">
                                             <!--  Medicines form-->
-                                            <div class="mt-2  ">
+                                            <di class="mt-2  ">
                                                 <div class="flex spacing-x-4">
                                                     <div class="flex py-5 pl-5 overflow-hidden"> 
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -216,15 +238,12 @@
                                                 </div>
 
                                                 <!-- Medicine form  -->
-                                                <form >
+                                                <form action="includes/updatemedicine_inc.php" method="post">
                                                 
                                                 <?php
 
-                                                    $sql="SELECT * FROM medicines WHERE id=$id ";
-                                                    //var_dump($id);
-                                                    
-                                                    
-
+                                                    $sql="SELECT * FROM medicines WHERE id = $id ";
+                      
                                                     $result=mysqli_query($connect,$sql);
                                                     if(isset($sql))
                                                     {
@@ -233,6 +252,7 @@
                                                         {
                                                             while($row=mysqli_fetch_assoc($result))
                                                             {
+                                                              
 
                                                               $id=$row["id"];
                                                               $medicinename=$row["medicinename"];
@@ -259,17 +279,37 @@
                                                                     </div>
                                                                     <div class="flex-grow w-1/2 ">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Batch Name</label>
-                                                                        <input value="<?php echo $batchnumber ;?>"  type="text" placeholder="Batch Name" name="batchname" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        <input value="<?php echo $batchnumber ;?>"  type="text" placeholder="Batch Name" name="batchnumber" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
                                                                     </div>
                                                                 </div>
                                                                 <div class="flex">
                                                                     <div class="flex-grow w-1/2 pr-2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Category</label>
-                                                                        <input value="<?php echo $medicinetype ;?>"  type="text" placeholder="Category" name="category" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        <select  name="category" id="dropdown" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200 font-medium" >
+                                                                        <option value="category" name="category"  ><?php echo $category ;?></option>
+                                                                        <option value="Antibiotic">Antibiotic</option>
+                                                                        <option value="Painkiller">Painkiller</option>
+                                                                        <option value="Antipyretic">Antipyretic</option>
+                                                                        <option value="Analgesic">Analgesic</option>
+                                                                        <option value="Vitamin">Vitamin</option>
+                                                                        <option value="Hormone">Hormone</option>
+                                                                        <option value="Antihistamine">Antihistamine</option>
+                                                                        <option value="Anti-inflammatory">Anti-inflammatory</option>
+                                                                        <option value="Others">Others</option>
+                                                                        </select>
                                                                     </div>
                                                                     <div class="flex-grow w-1/2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Medicine Type</label>
-                                                                        <input value="<?php echo $category ;?>"  type="text" placeholder="Category" name="category" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        <select  name="medicinetype"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200 font-medium" >
+                                                                        <option value="medicinetype" name="medicinetype"  ><?php echo $medicinetype ;?></option>
+                                                                        <option value="Tablet">Tablet</option>
+                                                                        <option value="Capsule">Capsule</option>
+                                                                        <option value="Syrup">Syrup</option>
+                                                                        <option value="Injection">Injection</option>
+                                                                        <option value="Cream">Cream/Ointment</option>
+                                                                        <option value="Drops">Drops</option>
+                                                                        </select>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                                 <div class="flex">
@@ -300,32 +340,35 @@
                                                                 <div class="flex">
                                                                     <div class="flex-grow w-1/2 pr-2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Stock Quantity</label>
-                                                                        <input value="<?php echo $quantity ;?>"  type="text" placeholder="Stock Quantity" name="quentity" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg  font-medium bg-slate-200" >
+                                                                        <input value="<?php echo $quantity ;?>" min="0" type="number" placeholder="Stock Quantity" name="quantity" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg  font-medium bg-slate-200" >
                                                                     </div>
                                                                     <div class="flex-grow w-1/2 ">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Purchase Price</label>
-                                                                        <input value="<?php echo "LKR"." . ". $purchaseprice ;?>"  type="text" placeholder="Purchase Price" name="purchaseprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        <input value="<?php echo $purchaseprice ;?>" min="0" step="0.01" type="number" placeholder="Purchase Price" name="purchaseprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="flex">
-                                                                    <div class="flex-grow w-1/2 pr-2">
+                                                                    <div class="flex-grow w-3/4 pr-2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Selling Price</label>
-                                                                        <input value="<?php echo "LKR"." . ". $sellingprice;?>"  type="text" placeholder="Selling Price" name="sellingprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
-                                                                        </a>
+                                                                        <input value="<?php echo $sellingprice;?>"  min="0" step="0.01" type="number" placeholder="Selling Price" name="sellingprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        <input   type="hidden" name="id"value="<?php echo $id ;?>" >
                                                                     </div>
                                                                     <div class="flex-grow w-1/2 ">
-                                                                    <label class="ml-4 font-bold text-xs text-slate-500"></label>
-                                                                        <a class="flex space-x-10 flex  font-medium tarnking-wide bg-gradient-to-tl from-blue-600 to-cyan-400 text-white w-full px-20 py-2.5 mt-2 rounded-lg " href="medicines.php">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
-                                                                        </svg>
-                                                                        <span>Go Back</span>
-                                                                        </a>
+                                                                      <hr class="mt-7">
+                                                                        <div class="flex flex-row-reverse ">
+                                                                            <div class="flex-initial ">
+                                                                              <button name="submit" class="flex space-x-2 flex items-center px-5 py-2.5 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
+                                                                                  <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
+                                                                                </svg>
+                                                                                  <span >Save</span>
+                                                                              </button>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        <hr class="mt-4">
                                                                 <?php
                                                             }
                                                         }
