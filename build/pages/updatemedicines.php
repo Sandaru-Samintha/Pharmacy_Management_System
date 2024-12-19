@@ -1,8 +1,12 @@
 <?php
 
-  session_start();
-  include_once "includes/dbconnection.php";
+    include_once "includes/dbconnection.php";
 
+    if(isset($_GET['id']))
+    {
+        $id=$_GET['id'];
+        //echo  $id;
+    }
 ?>
 
 
@@ -21,7 +25,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<f>
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,9 +68,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Add Medicine</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page"> Medicine Details</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Add Medicine</h6>
+            <h6 class="mb-0 font-bold capitalize"> Medicine Details</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -188,39 +192,32 @@
 
 
     <div class="w-full px-6 py-6 m-auto">
-        <!-- table Medicine -->
+        <!--  Medicines Detail -->
         <div class="flex flex-wrap-mx-3">
-            <div class="flex-none w-full max-w-full px-3">
-            <?php
-                  if(isset($_SESSION['emptyset'])) 
-                  {
-                      echo $_SESSION['emptyset'];
-                      unset($_SESSION['emptyset']);
-                  }
-                ?>
-                <div class="relative flex flex-col  min-w-0 mb-5 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
+            <div class="flex-none w-full  max-w-full px-3">
+                <div class="relative flex flex-col  min-w-0 h-full mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border ">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Add Medicine Form</h6>
+                        <h6> Medicine Details Form</h6>
                     </div>
                         <div class="flex max-h-screen">
                             <div class="m-auto">
                                 <div>
                                     <div class="flex-auto px-0 pt-0 pb-2">
                                         <div class="p-0 overflow-x-auto">
-                                            <!-- add Medicine form-->
-                                            <div class="mt-2  rounded-lg shadow-md">
+                                            <!--  Medicines form-->
+                                            <div class="mt-2  ">
                                                 <div class="flex spacing-x-4">
                                                     <div class="flex py-5 pl-5 overflow-hidden"> 
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                                                     <path fill-rule="evenodd" d="M16.098 2.598a3.75 3.75 0 1 1 3.622 6.275l-1.72.46V12a.75.75 0 0 1-.22.53l-.75.75a.75.75 0 0 1-1.06 0l-.97-.97-7.94 7.94a2.56 2.56 0 0 1-1.81.75 1.06 1.06 0 0 0-.75.31l-.97.97a.75.75 0 0 1-1.06 0l-.75-.75a.75.75 0 0 1 0-1.06l.97-.97a1.06 1.06 0 0 0 .31-.75c0-.68.27-1.33.75-1.81L11.69 9l-.97-.97a.75.75 0 0 1 0-1.06l.75-.75A.75.75 0 0 1 12 6h2.666l.461-1.72c.165-.617.49-1.2.971-1.682Zm-3.348 7.463L4.81 18a1.06 1.06 0 0 0-.31.75c0 .318-.06.63-.172.922a2.56 2.56 0 0 1 .922-.172c.281 0 .551-.112.75-.31l7.94-7.94-1.19-1.19Z" clip-rule="evenodd" />
                                                     </svg>
-
                                                         <h4 class="inline text-2xl font-semibold leading-none">Medicine Details</h4>
                                                     </div>
                                                 </div>
-                                                <!--add Medicine form  -->
-                                                <form action="includes/addmedicine_inc.php" method="post">
 
+                                                <!-- Medicine form  -->
+                                                <form >
+                                                
                                                 <?php
 
                                                     $sql="SELECT * FROM medicines WHERE id=$id ";
@@ -237,108 +234,104 @@
                                                             while($row=mysqli_fetch_assoc($result))
                                                             {
 
-                                                                $id=$row["id"];
-                                                                $medicinename=$row["medicinename"];
-                                                                $brandname=$row["brandname"];
-                                                                $batchnumber=$row["batchnumber"];
-                                                                $medicinetype=$row["medicinetype"];
-                                                                $category=$row["category"];
-                                                                $manufacturedate=$row["manufacturedate"];
-                                                                $expirydate=$row["expirydate"];
-                                                                $suppliername=$row["suppliername"];
-                                                                $quantity=$row["quantity"];
-                                                                $purchaseprice=$row["purchaseprice"];
-                                                                $sellingprice=$row["sellingprice"];
-                                                ?>        
-                                                    <!-- input fields -->
-                                                    <div class="px-5 pb-5">
-                                                        <input type="text" placeholder="Medicine Name" name="medicinename" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" placeholder="Brand Name" name="brandname" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" placeholder="Batch Number" name="batchnumber" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <div class="flex">
-                                                            <div class="flex-grow w-1/2 pr-2">
-                                                                <select  name="category" id="dropdown" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
-                                                                    <option value=""  disabled selected  >Category</option>
-                                                                    <option value="Antibiotic">Antibiotic</option>
-                                                                    <option value="Painkiller">Painkiller</option>
-                                                                    <option value="Antipyretic">Antipyretic</option>
-                                                                    <option value="Analgesic">Analgesic</option>
-                                                                    <option value="Vitamin">Vitamin</option>
-                                                                    <option value="Hormone">Hormone</option>
-                                                                    <option value="Antihistamine">Antihistamine</option>
-                                                                    <option value="Anti-inflammatory">Anti-inflammatory</option>
-                                                                    <option value="Others">Others</option>
-                                                                    
-                                                                    </select>
+                                                              $id=$row["id"];
+                                                              $medicinename=$row["medicinename"];
+                                                              $brandname=$row["brandname"];
+                                                              $batchnumber=$row["batchnumber"];
+                                                              $medicinetype=$row["medicinetype"];
+                                                              $category=$row["category"];
+                                                              $manufacturedate=$row["manufacturedate"];
+                                                              $expirydate=$row["expirydate"];
+                                                              $suppliername=$row["suppliername"];
+                                                              $quantity=$row["quantity"];
+                                                              $purchaseprice=$row["purchaseprice"];
+                                                              $sellingprice=$row["sellingprice"];
+                                                            
+                                                ?>
+                                                                <!-- input fields -->
+                                                                <div class="px-5 pb-5 ">
+                                                                <label class="ml-4 font-bold text-xs text-slate-500">Medicine Name</label>
+                                                                <input value="<?php echo $medicinename ;?>"  type="text" placeholder="Medicine Name" name="medicinename" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200">
+                                                                <div class="flex">
+                                                                    <div class="flex-grow w-1/2 pr-2">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Brand Name</label>
+                                                                        <input value="<?php echo $brandname ;?>"  type="text" placeholder="Brand Name" name="brandname" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                    </div>
+                                                                    <div class="flex-grow w-1/2 ">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Batch Name</label>
+                                                                        <input value="<?php echo $batchnumber ;?>"  type="text" placeholder="Batch Name" name="batchname" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex">
+                                                                    <div class="flex-grow w-1/2 pr-2">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Category</label>
+                                                                        <input value="<?php echo $medicinetype ;?>"  type="text" placeholder="Category" name="category" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                    </div>
+                                                                    <div class="flex-grow w-1/2">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Medicine Type</label>
+                                                                        <input value="<?php echo $category ;?>"  type="text" placeholder="Category" name="category" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex">
+                                                                    <div class="flex-grow w-1/2 pr-2">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Manufacture Date</label>
+                                                                        <input value="<?php echo $manufacturedate ;?>"  type="text" placeholder="Manufacture Date" name="manufacturedate" class="text-black w-full px-4 py-2.5 mt-2 font-medium  rounded-lg bg-slate-200" >
+                                                                    </div>
+                                                                    <div class="flex-grow w-1/2 ">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Expiry Date</label>
+                                                                        <input value="<?php echo $expirydate ;?>"  type="text" placeholder="Expiry Date" name="expirydate" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg  font-medium bg-slate-200" >
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="flex-grow w-1/2">
-                                                                <select  name="medicinetype" id="dropdown" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
-                                                                    <option value=""  disabled selected >Medicine Type</option>
-                                                                    <option value="Tablet">Tablet</option>
-                                                                    <option value="Capsule">Capsule</option>
-                                                                    <option value="Syrup">Syrup</option>
-                                                                    <option value="Injection">Injection</option>
-                                                                    <option value="Cream">Cream/Ointment</option>
-                                                                    <option value="Drops">Drops</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex">
-                                                            <div class="flex-grow w-1/2 pr-2">
-                                                                <label class="ml-4 font-bold text-xs text-slate-500">Manufacture Date</label>
-                                                                <input type="date" placeholder="Manufacture Date" name="manufacturedate" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
-                                                            </div>
-                                                            <div class="flex-grow w-1/2 ">
-                                                                <label class="ml-4 font-bold text-xs text-slate-500">Expiry Date</label>
-                                                                <input type="date" placeholder="Expiry Date" name="expirydate" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex space-x-2">
-                                                        <div class="flex py-5 pl-5 overflow-hidden">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                                                        <path fill-rule="evenodd" d="M16.098 2.598a3.75 3.75 0 1 1 3.622 6.275l-1.72.46V12a.75.75 0 0 1-.22.53l-.75.75a.75.75 0 0 1-1.06 0l-.97-.97-7.94 7.94a2.56 2.56 0 0 1-1.81.75 1.06 1.06 0 0 0-.75.31l-.97.97a.75.75 0 0 1-1.06 0l-.75-.75a.75.75 0 0 1 0-1.06l.97-.97a1.06 1.06 0 0 0 .31-.75c0-.68.27-1.33.75-1.81L11.69 9l-.97-.97a.75.75 0 0 1 0-1.06l.75-.75A.75.75 0 0 1 12 6h2.666l.461-1.72c.165-.617.49-1.2.971-1.682Zm-3.348 7.463L4.81 18a1.06 1.06 0 0 0-.31.75c0 .318-.06.63-.172.922a2.56 2.56 0 0 1 .922-.172c.281 0 .551-.112.75-.31l7.94-7.94-1.19-1.19Z" clip-rule="evenodd" />
-                                                        </svg>
-
-                                                        <h4 class="inline text-2xl font-semibold leading-none">Other Details</h4>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="px-5 pb-5">
-                                                    <input type="text" placeholder="Supplier Name" name="suppliername" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">   
-                                                        <div class="flex">
-                                                            <div class="flex-grow w-1/2 pr-2">
-                                                                <a class="flex space-x-10 flex items-center font-medium tarnking-wide bg-gradient-to-tl from-blue-600 to-cyan-400 text-white w-full px-4 py-2.5 mt-2 rounded-lg " href="addsuppliers.php">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                            <div class="flex space-x-2">
+                                                                <div class="flex py-5 pl-5 overflow-hidden">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                                                <path fill-rule="evenodd" d="M16.098 2.598a3.75 3.75 0 1 1 3.622 6.275l-1.72.46V12a.75.75 0 0 1-.22.53l-.75.75a.75.75 0 0 1-1.06 0l-.97-.97-7.94 7.94a2.56 2.56 0 0 1-1.81.75 1.06 1.06 0 0 0-.75.31l-.97.97a.75.75 0 0 1-1.06 0l-.75-.75a.75.75 0 0 1 0-1.06l.97-.97a1.06 1.06 0 0 0 .31-.75c0-.68.27-1.33.75-1.81L11.69 9l-.97-.97a.75.75 0 0 1 0-1.06l.75-.75A.75.75 0 0 1 12 6h2.666l.461-1.72c.165-.617.49-1.2.971-1.682Zm-3.348 7.463L4.81 18a1.06 1.06 0 0 0-.31.75c0 .318-.06.63-.172.922a2.56 2.56 0 0 1 .922-.172c.281 0 .551-.112.75-.31l7.94-7.94-1.19-1.19Z" clip-rule="evenodd" />
                                                                 </svg>
-                                                                <span>Add New Supplier</span>
-                                                                </a>
+
+                                                                <h4 class="inline text-2xl font-semibold leading-none">Other Details</h4>
+                                                                </div>
                                                             </div>
-                                                            <div class="flex-grow w-1/2 ">
-                                                                <input type="number" min="0" placeholder="Stock Quantity" name="quantity" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                            
+                                                            <div class="px-5 pb-5 ">
+                                                              <label class="ml-4 font-bold text-xs text-slate-500">Supplier Name</label>
+                                                              <input value="<?php echo $suppliername ;?>"  type="text" placeholder="Supplier Name" name="suppliername" class="text-black font-medium w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
+                                                              </a>
+                                                                <div class="flex">
+                                                                    <div class="flex-grow w-1/2 pr-2">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Stock Quantity</label>
+                                                                        <input value="<?php echo $quantity ;?>"  type="text" placeholder="Stock Quantity" name="quentity" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg  font-medium bg-slate-200" >
+                                                                    </div>
+                                                                    <div class="flex-grow w-1/2 ">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Purchase Price</label>
+                                                                        <input value="<?php echo "LKR"." . ". $purchaseprice ;?>"  type="text" placeholder="Purchase Price" name="purchaseprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex">
+                                                                    <div class="flex-grow w-1/2 pr-2">
+                                                                        <label class="ml-4 font-bold text-xs text-slate-500">Selling Price</label>
+                                                                        <input value="<?php echo "LKR"." . ". $sellingprice;?>"  type="text" placeholder="Selling Price" name="sellingprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg font-medium bg-slate-200" >
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="flex-grow w-1/2 ">
+                                                                    <label class="ml-4 font-bold text-xs text-slate-500"></label>
+                                                                        <a class="flex space-x-10 flex  font-medium tarnking-wide bg-gradient-to-tl from-blue-600 to-cyan-400 text-white w-full px-20 py-2.5 mt-2 rounded-lg " href="medicines.php">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+                                                                        </svg>
+                                                                        <span>Go Back</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="flex">
-                                                            <div class="flex-grow w-1/2 pr-2">
-                                                                <input type="number" min="0" step="0.01" placeholder="Purchase Price " name="purchaseprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                            </div>
-                                                            <div class="flex-grow w-1/2 ">
-                                                                <input type="number" min="0" step="0.01" placeholder="Selling Price" name="sellingprice" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <hr class="mt-4">
-                                                <div class="flex flex-row-reverse p-3 mr-3">
-                                                    <div class="flex-initial pl-3">
-                                                        <button name="submit" class="flex space-x-2 flex items-center px-5 py-2.5 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
-                                                        <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
-                                                        </svg>
-                                                            <span >Save</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                        <hr class="mt-4">
+                                                                <?php
+                                                            }
+                                                        }
+                                                    }
+                                                    ?>
+                                            
                                                 </form>
                                             </div>
                                         </div>
@@ -460,5 +453,4 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- main script file  -->
   <script src="../assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5" async></script>
-  jiijjnjh
 </html>
