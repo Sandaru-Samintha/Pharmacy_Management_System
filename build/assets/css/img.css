@@ -1,0 +1,21 @@
+.image_container {
+    display: flex; /* Align children horizontally */
+    animation: slide 16s infinite;
+    transform: translate(-50%,-50%);
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    30% {
+      transform: translateX(-100%);
+    }
+    55% {
+      transform: translateX(-200%);
+    }
+    100% {
+      transform: translateX(-300%);
+    }
+  }
+  
