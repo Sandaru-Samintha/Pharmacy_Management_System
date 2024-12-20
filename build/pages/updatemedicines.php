@@ -196,27 +196,14 @@
         <!--  Medicines Detail -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full  max-w-full px-3">
-            <?php
-                  if(isset($_SESSION['emptyset'])) 
-                  {
-                      echo $_SESSION['emptyset'];
-                      unset($_SESSION['emptyset']);
-                  }
-                ?>
                 <?php
-                  if(isset($_SESSION['emptyset'])) 
+                  if(isset($_SESSION['updatefailed'])) 
                   {
-                      echo $_SESSION['emptyset'];
-                      unset($_SESSION['emptyset']);
+                      echo $_SESSION['updatefailed'];
+                      unset($_SESSION['updatefailed']);
                   }
                 ?>
-                <?php
-                  if(isset($_SESSION['emptyset'])) 
-                  {
-                      echo $_SESSION['emptyset'];
-                      unset($_SESSION['emptyset']);
-                  }
-                ?>
+                
                 <div class="relative flex flex-col  min-w-0 h-full mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border ">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
                         <h6>Update Medicine Form</h6>

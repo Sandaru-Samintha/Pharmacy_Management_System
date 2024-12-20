@@ -1,8 +1,6 @@
 <?php
 
-    session_start();
-    include_once "includes/dbconnection.php";
-
+  session_start();
 ?>
 
 
@@ -65,9 +63,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Patients</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Add Customers</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Patients</h6>
+            <h6 class="mb-0 font-bold capitalize">Add Customers</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -186,152 +184,140 @@
     </nav>
 
     <!-- end Navbar -->
+
+
     <div class="w-full px-6 py-6 m-auto">
-        <!-- table Patients -->
+        <!-- table customers -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
-                <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-                    <?php
-                        if(isset($_SESSION['success']))  //show the success message in patients.php pass message in addpatient_inc.php
+                <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
+                <?php
+                        if(isset($_SESSION['emptyfieldcustomeradd']))
                         {
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
+                            echo $_SESSION['emptyfieldcustomeradd'];
+                            unset($_SESSION['emptyfieldcustomeradd']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['fail'])) ////show the success message in patients.php pass message in addpatient_inc.php
+                        if(isset($_SESSION['emailinvalid']))
                         {
-                            echo $_SESSION['fail'];
-                            unset($_SESSION['fail']);
+                            echo $_SESSION['emailinvalid'];
+                            unset($_SESSION['emailinvalid']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['updated'])) ////show the success message in updatepatients.php pass message in updatepatient_inc.php
+                        if(isset($_SESSION['phoneinvalid']))
                         {
-                            echo $_SESSION['updated'];
-                            unset($_SESSION['updated']);
+                            echo $_SESSION['phoneinvalid'];
+                            unset($_SESSION['phoneinvalid']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['updatefailed'])) ////show the success message in updatepatients.php pass message in updatepatient_inc.php
+                        if(isset($_SESSION['doctorphoneinvalid']))
                         {
-                            echo $_SESSION['updatefailed'];
-                            unset($_SESSION['updatefailed']);
+                            echo $_SESSION['doctorphoneinvalid'];
+                            unset($_SESSION['doctorphoneinvalid']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['deleted'])) ////show the success message in patients.php pass message in deletepatient.php
+                        if(isset($_SESSION['failadding']))
                         {
-                            echo $_SESSION['deleted'];
-                            unset($_SESSION['deleted']);
+                            echo $_SESSION['failadding'];
+                            unset($_SESSION['failadding']);
                         }
                     ?>
-                    <?php
-                        if(isset($_SESSION['deletefailed'])) ////show the success message in patients.php pass message in deletepatinet.php
-                        {
-                            echo $_SESSION['deletefailed'];
-                            unset($_SESSION['deletefailed']);
-                        }
-                    ?>
-
-
-
-
-
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Patients Table</h6>
+                        <h6>Add customer Form</h6>
                     </div>
+                        <div class="flex max-h-screen">
+                            <div class="m-auto">
+                                <div>
+                                    <div class="flex-auto px-0 pt-0 pb-2">
+                                        <div class="p-0 overflow-x-auto">
+                                            <!-- add customers form-->
+                                            <div class="mt-2 bg-white rounded-lg shadow-md">
+                                                <div class="flex spacing-x-4">
+                                                    <div class="flex py-5 pl-5 overflow-hidden"> 
+                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+                                                        <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                                      </svg>
 
-                        <div class="flex-auto px-0 pt-0 pb-0">
-                            <div class="p-0 overflow-x-auto">
-                            <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
-                                <thead class="align-bottom">
-                                <tr>
-                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Patient info</th>
-                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Phone No</th>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Date of birth</th>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Location</th>
-                                    <th colspan="3" class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
-                                    <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
-                                </tr>
-                                </thead>
-
-                                <?php
-
-                                    $sql="SELECT * FROM patients";
-                                    $result=mysqli_query($connect,$sql);
-
-                                    if($result==true)
-                                    {
-                                        $count=mysqli_num_rows($result);
-                                        if($count>0)
-                                        {
-                                            while($row = mysqli_fetch_assoc($result))
-                                            {
-                                                $id=$row['id'];
-                                                $name=$row['name'];
-                                                $dob=$row['dob'];
-                                                $phone=$row['phone'];
-                                                $email=$row['email'];
-                                                $location=$row['location'];
-                                                $conditions=$row['conditions'];
-                                                $Oconditions=$row['Oconditions'];
-
-                                ?>
-                                                <tbody>
-                                    
-                                                <tr>
-                                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <div class="flex px-2 py-1">
-                                                        <div>
-                                                        <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user2" />
+                                                        <h4 class="inline text-2xl font-semibold leading-none">Customer Details</h4>
+                                                    </div>
+                                                </div>
+                                                <!--add customer form  -->
+                                                <form action="includes/addcustomers_inc.php" method="post">
+                                                    <!-- input fields -->
+                                                    <div class="px-5 pb-5">
+                                                      <div class="flex">
+                                                          <div class="flex-grow w-1/2 pr-2">
+                                                              <input type="text" name="firstname" placeholder="First Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                          </div>
+                                                          <div class="flex-grow w-1/2 ">
+                                                              <input type="text" name="lastname"  placeholder="Last Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                          </div>
+                                                      </div>
+                                                        <input type="text" name="email" placeholder="Email"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        <input type="tel" name="phone" placeholder="Contact No"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        <input type="text" name="location" placeholder="Location" class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
+                                                        <div class="flex">
+                                                        <div class="flex-grow w-1/2 pr-2">
+                                                            <input type="number"min="1" name="age" placeholder="Age" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
                                                         </div>
-                                                        <div class="flex flex-col justify-center">
-                                                        <h6 class="mb-0 leading-normal text-sm"><?php echo $name; ?></h6>
-                                                        <p class="mb-0 leading-tight text-xs text-slate-400"><?php echo $email; ?></p>
+                                                        <div class="flex-grow w-1/2 ">
+                                                          <select  name="gender" id="dropdown" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
+                                                              <option value=""  disabled selected >Gender</option>
+                                                              <option value="Male">Male</option>
+                                                              <option value="Female">Female</option>
+                                                            </select>
+                                                          </div>
+                                                    </div>
+                                                    </div>
+
+                                                    <div class="flex space-x-2">
+                                                        <div class="flex py-5 pl-5 overflow-hidden">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="currentColor" class="size-7">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                                          <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
+                                                          <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                                        </svg>
+                                                        <h4 class="inline text-2xl font-semibold leading-none">Prescription Details</h4>
                                                         </div>
                                                     </div>
-                                                    </td>
-
-                                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $phone;?></p>
-                                                    </td>
-
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo $dob; ?></span>
-                                                    </td>
-
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo$location; ?></span>
-                                                    </td>
-
-                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href=".php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-blue-600 to-cyan-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">View</a>
-                                                    </td>
-
-                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href="updatePatients.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
-                                                    </td>
-
-                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href="includes/deletepatients.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            <?php
-                                            }
-                                        }
-                                    }
-                                    ?>
-                                    </table>
+                                                    
+                                                    <div class="px-5 pb-5">
+                                                    <input type="text" name="allergic" placeholder="Allergics"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                    <div class="flex">
+                                                        <div class="flex-grow w-1/4 pr-2">
+                                                            <input type="text" name="doctorname" placeholder="Doctor's Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        </div>
+                                                        <div class="flex-grow w-1/4 ">
+                                                            <input type="tel" name="doctorphone"  placeholder="Doctor's Contact No" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="mt-4">
+                                                <div class="flex flex-row-reverse p-3 mr-3">
+                                                    <div class="flex-initial pl-3">
+                                                        <button type="submit" name="submit"  class="flex space-x-2 flex items-center px-5 py-2.5 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
+                                                        <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                            <span >Save</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
                 </div>
             </div>
         </div>
-    </div>
 
 
         <footer class="pt-4">

@@ -192,31 +192,10 @@
             <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <?php
-                        if(isset($_SESSION['success']))  //show the success message in Medicines.php pass message in addpatient_inc.php
-                        {
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['fail'])) ////show the success message in Medicines.php pass message in addpatient_inc.php
-                        {
-                            echo $_SESSION['fail'];
-                            unset($_SESSION['fail']);
-                        }
-                    ?>
-                    <?php
                         if(isset($_SESSION['updated'])) ////show the success message in updateMedicines.php pass message in updatepatient_inc.php
                         {
                             echo $_SESSION['updated'];
                             unset($_SESSION['updated']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['updatefailed'])) ////show the success message in updateMedicines.php pass message in updatepatient_inc.php
-                        {
-                            echo $_SESSION['updatefailed'];
-                            unset($_SESSION['updatefailed']);
                         }
                     ?>
                     <?php

@@ -23,4 +23,4 @@
             header("Location:../medicines.php");
         }
     }
-?>   
+?>

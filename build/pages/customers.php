@@ -1,3 +1,12 @@
+<?php
+
+    session_start();
+    include_once "includes/dbconnection.php";
+
+?>
+
+
+
 <!--
 =========================================================
 * Soft UI Dashboard Tailwind - v1.0.5
@@ -56,9 +65,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Add Patients</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Patients</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Add Patients</h6>
+            <h6 class="mb-0 font-bold capitalize">Patients</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -177,84 +186,164 @@
     </nav>
 
     <!-- end Navbar -->
-
-
     <div class="w-full px-6 py-6 m-auto">
         <!-- table Patients -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-                    <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Add Patient Form</h6>
-                    </div>
-                        <div class="flex max-h-screen">
-                            <div class="m-auto">
-                                <div>
-                                    <div class="flex-auto px-0 pt-0 pb-2">
-                                        <div class="p-0 overflow-x-auto">
-                                            <!-- add patients form-->
-                                            <div class="mt-2 bg-white rounded-lg shadow-md">
-                                                <div class="flex spacing-x-4">
-                                                    <div class="flex py-5 pl-5 overflow-hidden"> 
-                                                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="currentColor" class="size-7">
-                                                    <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                                    </svg>
-                                                        <h4 class="inline text-2xl font-semibold leading-none">Patient Details</h4>
-                                                    </div>
-                                                </div>
-                                                <!--add patient form  -->
-                                                <form action="includes/addpatients_inc.php" method="post">
-                                                    <!-- input fields -->
-                                                    <div class="px-5 pb-5">
-                                                        <input type="text" name="name" placeholder="Patient Name" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" name="email" placeholder="Email" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" name="dob" placeholder="Dob" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="telephone" name="phone" placeholder="Phone" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" name="location" placeholder="Location" required class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
-                                                    </div>
+                    <?php
+                        if(isset($_SESSION['successadding']))  //show the success message in patients.php pass message in addpatient_inc.php
+                        {
+                            echo $_SESSION['successadding'];
+                            unset($_SESSION['successadding']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['updated'])) ////show the success message in updatepatients.php pass message in updatepatient_inc.php
+                        {
+                            echo $_SESSION['updated'];
+                            unset($_SESSION['updated']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['updatefailed'])) ////show the success message in updatepatients.php pass message in updatepatient_inc.php
+                        {
+                            echo $_SESSION['updatefailed'];
+                            unset($_SESSION['updatefailed']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['deleted'])) ////show the success message in patients.php pass message in deletepatient.php
+                        {
+                            echo $_SESSION['deleted'];
+                            unset($_SESSION['deleted']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['deletefailed'])) ////show the success message in patients.php pass message in deletepatinet.php
+                        {
+                            echo $_SESSION['deletefailed'];
+                            unset($_SESSION['deletefailed']);
+                        }
+                    ?>
 
-                                                    <div class="flex space-x-2">
-                                                        <div class="flex py-5 pl-5 overflow-hidden">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="currentColor" class="size-7">
-                                                        <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                                        </svg>
-                                                        <h4 class="inline text-2xl font-semibold leading-none">Other Details</h4>
+
+
+
+
+                    <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
+                        <h6>Patients Table</h6>
+                    </div>
+
+                        <div class="flex-auto px-0 pt-0 pb-0">
+                            <div class="p-0 overflow-x-auto">
+                            <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                                <thead class="align-bottom">
+                                <tr>
+                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer info</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Contact No</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Location</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Age</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Gender</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Allergic</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Doctor's Name</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Doctor's Cont.No</th>
+                                    <th colspan="2" class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
+                                    <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
+                                </tr>
+                                </thead>
+
+                                <?php
+
+                                    $sql="SELECT * FROM customers";
+                                    $result=mysqli_query($connect,$sql);
+
+                                    if($result==true)
+                                    {
+                                        $count=mysqli_num_rows($result);
+                                        if($count>0)
+                                        {
+                                            while($row = mysqli_fetch_assoc($result))
+                                            {
+                                              $id=$row["id"];
+                                              $firstname=$row["firstname"];
+                                              $lastname=$row["lastname"];
+                                              $email=$row["email"];
+                                              $phone=$row["phone"];
+                                              $location=$row["location"];
+                                              $age=$row["age"];
+                                              $gender=$row["gender"];
+                                              $allergic=$row["allergic"];
+                                              $doctorname=$row["doctorname"];
+                                              $doctorphone=$row["doctorphone"];
+
+                                ?>
+                                                <tbody>
+                                    
+                                                <tr>
+                                                    <td class="p-2 align-middle  bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <div class="flex px-2 py-1">
+                                                        <div>
+                                                        <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user2" />
+                                                        </div>
+                                                        <div class="flex flex-col justify-center">
+                                                        <h6 class="mb-0 leading-normal text-sm"><?php echo $firstname." ".$lastname; ?></h6>
+                                                        <p class="mb-0 leading-tight text-xs text-slate-400"><?php echo $email; ?></p>
                                                         </div>
                                                     </div>
-                                                    
-                                                    <div class="px-5 pb-5">
-                                                    <input type="text" name="allergic" placeholder="Allergics" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                    <div class="flex">
-                                                        <div class="flex-grow w-1/4 pr-2">
-                                                            <input type="text" name="conditions" placeholder="Conditions" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        </div>
-                                                        <div class="flex-grow w-1/4 ">
-                                                            <input type="text" name="Oconditions"  placeholder="Other Conditions" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr class="mt-4">
-                                                <div class="flex flex-row-reverse p-3 mr-3">
-                                                    <div class="flex-initial pl-3">
-                                                        <button type="submit" name="submit"  class="flex space-x-2 flex items-center px-5 py-2.5 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
-                                                        <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
-                                                        </svg>
-                                                            <span >Save</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
+                                                    </td>
+
+                                                    <td class="p-2  align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $phone;?></p>
+                                                    </td>
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo $location; ?></span>
+                                                    </td>
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo$age; ?></span>
+                                                    </td>
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo$gender; ?></span>
+                                                    </td>
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo$allergic; ?></span>
+                                                    </td>
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo"Dr . ".$doctorname; ?></span>
+                                                    </td>
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo$doctorphone; ?></span>
+                                                    </td>
+
+
+                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                                    <a href="updatePatients.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
+                                                    </td>
+
+                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                                    <a href="includes/deletepatients.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                        
                 </div>
             </div>
         </div>
+    </div>
 
 
         <footer class="pt-4">

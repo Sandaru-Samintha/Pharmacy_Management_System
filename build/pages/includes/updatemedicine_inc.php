@@ -20,15 +20,6 @@
 
         
 
-
-
-        // if(empty($medicinename)||empty($brandname)||empty($batchnumber)||empty($medicinetype)||empty($category)||empty($manufacturedate)||empty($expirydate)||empty($suppliername)||empty($quantity)||empty($purchaseprice)||empty($sellingprice))
-        // {
-        //     $_SESSION["emptyset"]="<div class='bg-gradient-to-tl from-red-600 to-yellow-400 text-center text-white'>Empty field, try again..!</div>";
-        //     header("Location:../updatemedicines.php?erro=emptyfield");
-        //     exit();
-        // }
-
         $sql= "UPDATE medicines SET
 
             medicinename='$medicinename',
@@ -48,12 +39,12 @@
 
         if($result==true)
         {
-            $_SESSION["success"]="<div class='flex justify-center items-center bg-gradient-to-tl from-green-400 to-lime-400 text-white'>Successfully updated the medicine</div>";
+            $_SESSION["updated"]="<div class='flex justify-center items-center bg-gradient-to-tl from-green-400 to-lime-400 text-white'>Successfully updated the medicine</div>";
             header("Location:../medicines.php");
         }
         else
         {
-            $_SESSION["fail"]="<div class='bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Failed to update, try again..!</div>";
+            $_SESSION["updatefailed"]="<div class='bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Failed to update, try again..!</div>";
             header("Location:../updatemedicines.php");
         }
     }
