@@ -65,9 +65,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Patients</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Customers</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Patients</h6>
+            <h6 class="mb-0 font-bold capitalize">Customers</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -187,40 +187,33 @@
 
     <!-- end Navbar -->
     <div class="w-full px-6 py-6 m-auto">
-        <!-- table Patients -->
+        <!-- table Customers -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <?php
-                        if(isset($_SESSION['successadding']))  //show the success message in patients.php pass message in addpatient_inc.php
+                        if(isset($_SESSION['successadding']))  //show the success message in Customers.php pass message in addpatient_inc.php
                         {
                             echo $_SESSION['successadding'];
                             unset($_SESSION['successadding']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['updated'])) ////show the success message in updatepatients.php pass message in updatepatient_inc.php
+                        if(isset($_SESSION['successupdating']))
                         {
-                            echo $_SESSION['updated'];
-                            unset($_SESSION['updated']);
+                            echo $_SESSION['successupdating'];
+                            unset($_SESSION['successupdating']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['updatefailed'])) ////show the success message in updatepatients.php pass message in updatepatient_inc.php
-                        {
-                            echo $_SESSION['updatefailed'];
-                            unset($_SESSION['updatefailed']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['deleted'])) ////show the success message in patients.php pass message in deletepatient.php
+                        if(isset($_SESSION['deleted'])) 
                         {
                             echo $_SESSION['deleted'];
                             unset($_SESSION['deleted']);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['deletefailed'])) ////show the success message in patients.php pass message in deletepatinet.php
+                        if(isset($_SESSION['deletefailed']))
                         {
                             echo $_SESSION['deletefailed'];
                             unset($_SESSION['deletefailed']);
@@ -232,7 +225,7 @@
 
 
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Patients Table</h6>
+                        <h6>Customers Table</h6>
                     </div>
 
                         <div class="flex-auto px-0 pt-0 pb-0">
@@ -322,11 +315,11 @@
 
 
                                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href="updatePatients.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
+                                                    <a href="updatecustomers.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
                                                     </td>
 
                                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href="includes/deletepatients.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
+                                                    <a href="includes/deletecustomers.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
                                                     </td>
                                                 </tr>
                                                 </tbody>

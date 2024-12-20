@@ -219,13 +219,7 @@
                             unset($_SESSION['doctorphoneinvalid']);
                         }
                     ?>
-                    <?php
-                        if(isset($_SESSION['failadding']))
-                        {
-                            echo $_SESSION['failadding'];
-                            unset($_SESSION['failadding']);
-                        }
-                    ?>
+                    
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
                         <h6>Add customer Form</h6>
                     </div>
@@ -277,14 +271,13 @@
                                                     <div class="flex space-x-2">
                                                         <div class="flex py-5 pl-5 overflow-hidden">
                                                         <svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="currentColor" class="size-7">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                                                           <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
                                                           <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                                         </svg>
                                                         <h4 class="inline text-2xl font-semibold leading-none">Prescription Details</h4>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="px-5 pb-5">
                                                     <input type="text" name="allergic" placeholder="Allergics"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
                                                     <div class="flex">

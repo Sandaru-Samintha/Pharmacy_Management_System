@@ -1,5 +1,6 @@
 <?php
 
+    session_start();
     include_once "includes/dbconnection.php";
 
     if(isset($_GET['id']))
@@ -68,9 +69,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Update Patients</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Update Customer</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Update Patients</h6>
+            <h6 class="mb-0 font-bold capitalize">Update Customer</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -192,105 +193,150 @@
 
 
     <div class="w-full px-6 py-6 m-auto">
-        <!-- Update Patients -->
+        <!-- table customers -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
-                <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
+                    <?php
+                        if(isset($_SESSION['updateemailinvalid']))
+                        {
+                            echo $_SESSION['updateemailinvalid'];
+                            unset($_SESSION['updateemailinvalid']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['updatephoneinvalid']))
+                        {
+                            echo $_SESSION['updatephoneinvalid'];
+                            unset($_SESSION['updatephoneinvalid']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['updatedoctorphoneinvalid']))
+                        {
+                            echo $_SESSION['updatedoctorphoneinvalid'];
+                            unset($_SESSION['updatedoctorphoneinvalid']);
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['failupdating']))
+                        {
+                            echo $_SESSION['failupdating'];
+                            unset($_SESSION['failupdating']);
+                        }
+                    ?>
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Update Patient Form</h6>
+                        <h6>Update customer Form</h6>
                     </div>
                         <div class="flex max-h-screen">
                             <div class="m-auto">
                                 <div>
                                     <div class="flex-auto px-0 pt-0 pb-2">
                                         <div class="p-0 overflow-x-auto">
-                                            <!-- update patients form-->
+                                            <!-- add customers form-->
                                             <div class="mt-2 bg-white rounded-lg shadow-md">
                                                 <div class="flex spacing-x-4">
                                                     <div class="flex py-5 pl-5 overflow-hidden"> 
-                                                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="currentColor" class="size-7">
-                                                    <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                                    </svg>
-                                                        <h4 class="inline text-2xl font-semibold leading-none">Patient Details</h4>
+                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+                                                        <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                                      </svg>
+
+                                                        <h4 class="inline text-2xl font-semibold leading-none">Customer Details</h4>
                                                     </div>
                                                 </div>
+                                                <!--add customer form  -->
+                                                <form action="includes/updatecustomers_inc.php" method="post">
+                                                    <!-- input fields -->
+                                                
+                                                    <?php
 
-                                                <!--update patient form  -->
-                                                <form action="includes/updatepatients_inc.php" method="post">
-                                                <?php
+                                                        $sql="SELECT * FROM customers WHERE id=$id ";
+                                                        $result=mysqli_query($connect,$sql);
 
-                                                    $sql="SELECT * FROM patients WHERE id=$id ";
-                                                    //var_dump($id);
-                                                    
-                                                    
-
-                                                    $result=mysqli_query($connect,$sql);
-                                                    if(isset($sql))
-                                                    {
-                                                        $count=mysqli_num_rows($result);
-                                                        if($count>0)
+                                                        if($result==true)
                                                         {
-                                                            while($row=mysqli_fetch_assoc($result))
+                                                            $count=mysqli_num_rows($result);
+                                                            if($count>0)
                                                             {
-                                                                $id=$row['id'];
-                                                                $name=$row['name'];
-                                                                $dob=$row['dob'];
-                                                                $phone=$row['phone'];
-                                                                $email=$row['email'];
-                                                                $location=$row['location'];
-                                                                $allergic=$row['allergic'];
-                                                                $conditions=$row['conditions'];
-                                                                $Oconditions=$row['Oconditions'];
-                                                                
+                                                                while($row = mysqli_fetch_assoc($result))
+                                                                {
+                                                                  $id=$row["id"];
+                                                                  $firstname=$row["firstname"];
+                                                                  $lastname=$row["lastname"];
+                                                                  $email=$row["email"];
+                                                                  $phone=$row["phone"];
+                                                                  $location=$row["location"];
+                                                                  $age=$row["age"];
+                                                                  $gender=$row["gender"];
+                                                                  $allergic=$row["allergic"];
+                                                                  $doctorname=$row["doctorname"];
+                                                                  $doctorphone=$row["doctorphone"];
 
-                                                ?>
-                                                                <!-- input fields -->
-                                                                <div class="px-5 pb-5">
-                                                                    <input type="text" name="name" value="<?php echo $name;?>" placeholder="Patient Name" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="text" name="email" value="<?php echo $email;?>" placeholder="Email" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="text" name="dob" value="<?php echo $dob;?>" placeholder="Dob" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="telephone" name="phone" value="<?php echo $phone;?>" placeholder="Phone" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="text" name="location" value="<?php echo $location;?>"placeholder="Location" required class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
-                                                                    <input type="hidden" name="id"  value="<?php echo $id;?>" placeholder="Patient Name" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">  <!-- using for pass the id value updatepatients_inc.php  and use type="hidden for hide the input in form "  -->
-                                                                </div>
-
-                                                                <div class="flex space-x-2">
-                                                                    <div class="flex py-5 pl-5 overflow-hidden">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="currentColor" class="size-7">
-                                                                    <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                                                    </svg>
-                                                                    <h4 class="inline text-2xl font-semibold leading-none">Other Details</h4>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="px-5 pb-5">
-                                                                <input type="text" name="allergic" value="<?php echo $allergic;?>" placeholder="Allergics" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                <div class="flex">
-                                                                    <div class="flex-grow w-1/4 pr-2">
-                                                                        <input type="text" name="conditions" value="<?php echo $conditions;?>"placeholder="Conditions" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    </div>
-                                                                    <div class="flex-grow w-1/4 ">
-                                                                        <input type="text" name="Oconditions"  value="<?php echo $Oconditions;?>" placeholder="Other Conditions" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    </div>
-                                                                </div>
-                                                                </div>
-                                                                <hr class="mt-4">
-                                                                <div class="flex flex-row-reverse p-3 mr-3">
-                                                                    <div class="flex-initial pl-3">
-                                                                        <button type="submit" name="submit"  class="flex space-x-2 flex items-center px-5 py-2.5 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
-                                                                        <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
-                                                                        </svg>
-                                                                            <span >Save</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <?php
-                                                            }
-                                                        }
-                                                    }
                                                     ?>
-                                            
+                                                    <div class="px-5 pb-5">
+                                                      <div class="flex">
+                                                          <div class="flex-grow w-1/2 pr-2">
+                                                              <input type="text" name="firstname" value="<?php echo $firstname ?>" placeholder="First Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                          </div>
+                                                          <div class="flex-grow w-1/2 ">
+                                                              <input type="text" name="lastname" value="<?php echo $lastname ?>"  placeholder="Last Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                          </div>
+                                                      </div>
+                                                        <input type="text" name="email" value="<?php echo $email ?>" placeholder="Email"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        <input type="tel" name="phone" value="<?php echo $phone ?>" placeholder="Contact No"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        <input type="text" name="location" value="<?php echo $location ?>" placeholder="Location" class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
+                                                        <div class="flex">
+                                                        <div class="flex-grow w-1/2 pr-2">
+                                                            <input type="number"min="1" value="<?php echo $age ?>" name="age" placeholder="Age" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        </div>
+                                                        <div class="flex-grow w-1/2 ">
+                                                          <select  name="gender" id="dropdown" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
+                                                              <option value="<?php echo $gender; ?>" name="gender"><?php echo $gender; ?></option>
+                                                              <option value="Male">Male</option>
+                                                              <option value="Female">Female</option>
+                                                            </select>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex space-x-2">
+                                                        <div class="flex py-5 pl-5 overflow-hidden">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="currentColor" class="size-7">
+                                                          <path fillRule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clipRule="evenodd" />
+                                                          <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                                        </svg>
+                                                        <h4 class="inline text-2xl font-semibold leading-none">Prescription Details</h4>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="px-5 pb-5">
+                                                    <input type="text" name="allergic" value="<?php echo $allergic ?>" placeholder="Allergics"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                    <div class="flex">
+                                                        <div class="flex-grow w-1/4 pr-2">
+                                                            <input type="text" name="doctorname" value="<?php echo $doctorname ?>" placeholder="Doctor's Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        </div>
+                                                        <div class="flex-grow w-1/4 ">
+                                                            <input type="tel" name="doctorphone" value="<?php echo $doctorphone ?>"  placeholder="Doctor's Contact No" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                            <input type="hidden" name="id" value="<?php echo $id ?>" placeholder="id" class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="mt-4">
+                                                <div class="flex flex-row-reverse p-3 mr-3">
+                                                    <div class="flex-initial pl-3">
+                                                        <button type="submit" name="submit"  class="flex space-x-2 flex items-center px-5 py-2.5 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
+                                                        <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                            <span >Save</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                                }
+                                                              }
+                                                            }
+                                                            ?>
                                                 </form>
                                             </div>
                                         </div>
