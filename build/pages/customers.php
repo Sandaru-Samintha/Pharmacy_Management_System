@@ -269,7 +269,6 @@
                                               $allergic=$row["allergic"];
                                               $doctorname=$row["doctorname"];
                                               $doctorphone=$row["doctorphone"];
-
                                 ?>
                                                 <tbody>
                                     

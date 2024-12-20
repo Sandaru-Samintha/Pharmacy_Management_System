@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!--
 =========================================================
 * Soft UI Dashboard Tailwind - v1.0.5
@@ -183,7 +187,36 @@
         <!-- table Suppliers -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
-                <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+            <?php
+                  if(isset($_SESSION['addempty'])) 
+                  {
+                      echo $_SESSION['addempty'];
+                      unset($_SESSION['addempty']);
+                  }
+              ?>
+              <?php
+                  if(isset($_SESSION['addfail'])) 
+                  {
+                      echo $_SESSION['addfail'];
+                      unset($_SESSION['addfail']);
+                  }
+              ?>
+              <?php
+                  if(isset($_SESSION['emailinvalid'])) 
+                  {
+                      echo $_SESSION['emailinvalid'];
+                      unset($_SESSION['emailinvalid']);
+                  }
+              ?>
+              <?php
+                  if(isset($_SESSION['phoneinvalid'])) 
+                  {
+                      echo $_SESSION['phoneinvalid'];
+                      unset($_SESSION['phoneinvalid']);
+                  }
+              ?>
+              
+                <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
                         <h6>Add Supplier Form</h6>
                     </div>
@@ -193,10 +226,10 @@
                                     <div class="flex-auto px-0 pt-0 pb-2">
                                         <div class="p-0 overflow-x-auto">
                                             <!-- add suppliers form-->
-                                            <div class="mt-2 bg-white rounded-lg shadow-md">
+                                            <div class="mt-2">
                                                 <div class="flex spacing-x-4">
                                                     <div class="flex py-5 pl-5 overflow-hidden"> 
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-7">
                                                     <path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 1 1 6 0h3a.75.75 0 0 0 .75-.75V15Z" />
                                                     <path d="M8.25 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0ZM15.75 6.75a.75.75 0 0 0-.75.75v11.25c0 .087.015.17.042.248a3 3 0 0 1 5.958.464c.853-.175 1.522-.935 1.464-1.883a18.659 18.659 0 0 0-3.732-10.104 1.837 1.837 0 0 0-1.47-.725H15.75Z" />
                                                     <path d="M19.5 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
@@ -208,10 +241,18 @@
                                                 <form action="includes/addsuppliers_inc.php" method="post">
                                                     <!-- input fields -->
                                                     <div class="px-5 pb-5">
-                                                        <input type="text" name="name" placeholder="Supplier Name" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" name="email" placeholder="Email" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" name="phone" placeholder="Phone" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                        <input type="text" name="location" placeholder="Location" required class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
+                                                      <div class="flex">
+                                                            <div class="flex-grow w-1/2 pr-2">
+                                                                <input type="text" name="firstname" placeholder="First Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                            </div>
+                                                            <div class="flex-grow w-1/2 ">
+                                                                <input type="text" name="lastname"  placeholder="Last Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" name="email" placeholder="Email" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        <input type="text" name="phone" placeholder="Contact No" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                        <input type="text" name="location" placeholder="Location" class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
+                                                        <input type="hidden" name="status" placeholder="status" class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
                                                     </div>
 
                                                     

@@ -23,25 +23,25 @@
         
         //check for invalied field
 
-        if(!preg_match("/^[\w.%+-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/",$email))
-        {
-            $_SESSION["updateemailinvalid"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalide email address</div>";
-            header("Location:../updatecustomers.php?error=invalidfield");
-            exit();
-        }
+        // if(!preg_match("/^[\w.%+-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/",$email))
+        // {
+        //     $_SESSION["updateemailinvalid"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalide email address</div>";
+        //     header("Location:../updatecustomers.php?error=invalidfield");
+        //     exit();
+        // }
 
-        elseif(!preg_match('/^\+?[0-9]{10,15}$/',$phone))
-        {
-            $_SESSION["updatephoneinvalid"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalide Customer contact number</div>";
-            header("Location:../updatecustomers.php?error=invalidfield");
-            exit();
-        }
-        elseif(!preg_match('/^\+?[0-9]{10,15}$/',$doctorphone))
-        {
-            $_SESSION["updatedoctorphoneinvalid"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalide Doctor's contact number</div>";
-            header("Location:../updatecustomers.php?error=invalidfield");
-            exit();
-        }
+        // elseif(!preg_match('/^\+?[0-9]{10,15}$/',$phone))
+        // {
+        //     $_SESSION["updatephoneinvalid"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalide Customer contact number</div>";
+        //     header("Location:../updatecustomers.php?error=invalidfield");
+        //     exit();
+        // }
+        // elseif(!preg_match('/^\+?[0-9]{10,15}$/',$doctorphone))
+        // {
+        //     $_SESSION["updatedoctorphoneinvalid"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalide Doctor's contact number</div>";
+        //     header("Location:../updatecustomers.php?error=invalidfield");
+        //     exit();
+        // }
 
         $sql= "UPDATE customers SET
 

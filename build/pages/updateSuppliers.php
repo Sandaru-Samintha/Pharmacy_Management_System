@@ -192,9 +192,30 @@
 
 
     <div class="w-full px-6 py-6 m-auto">
-        <!-- Update Patients -->
+        <!-- Update Suppliers -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
+            </*?php
+                if(isset($_SESSION['updatedemailinvalid'])) 
+                  {
+                    echo $_SESSION['updatedemailinvalid'];
+                    unset($_SESSION['updatedemailinvalid']);
+                  }
+                ?*/>
+                <?php
+                if(isset($_SESSION['updatedfailed'])) 
+                  {
+                    echo $_SESSION['updatedfailed'];
+                    unset($_SESSION['updatedfailed']);
+                  }
+                 ?>
+                 </*?php
+                 if(isset($_SESSION['updatephoneinvalid'])) 
+                  {
+                    echo $_SESSION['updatephoneinvalid'];
+                    unset($_SESSION['updatephoneinvalid']);
+                  }
+                 ?>
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
                         <h6>Update Supplier Form</h6>
@@ -221,7 +242,7 @@
                                                 <form action="includes/updatesuppliers_inc.php" method="post">
                                                 <?php
 
-                                                    $sql="SELECT * FROM suppliers WHERE id=$id ";
+                                                    $sql="SELECT * FROM suppliers WHERE id= $id ";
                                                     //var_dump($id);
                                                     
                                                     
@@ -235,7 +256,8 @@
                                                             while($row=mysqli_fetch_assoc($result))
                                                             {
                                                                 $id=$row['id'];
-                                                                $name=$row['name'];
+                                                                $firstname=$row['firstname'];
+                                                                $lastname=$row['lastname'];
                                                                 $phone=$row['phone'];
                                                                 $email=$row['email'];
                                                                 $location=$row['location'];
@@ -243,11 +265,18 @@
                                                 ?>
                                                                 <!-- input fields -->
                                                                 <div class="px-5 pb-5">
-                                                                    <input type="text" name="name" value="<?php echo $name;?>" placeholder="Supplier Name" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="text" name="email" value="<?php echo $email;?>" placeholder="Email" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="telephone" name="phone" value="<?php echo $phone;?>" placeholder="Phone" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
-                                                                    <input type="text" name="location" value="<?php echo $location;?>"placeholder="Location" required class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
-                                                                    <input type="hidden" name="id"  value="<?php echo $id;?>" placeholder="Patient Name" required class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">  <!-- using for pass the id value updatepatients_inc.php  and use type="hidden for hide the input in form "  -->
+                                                                <div class="flex">
+                                                                  <div class="flex-grow w-1/2 pr-2">
+                                                                      <input type="text" name="firstname" placeholder="First Name" value="<?php echo $firstname;?>"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                                  </div>
+                                                                  <div class="flex-grow w-1/2 ">
+                                                                      <input type="text" name="lastname" value="<?php echo $lastname;?>"  placeholder="Last Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                                  </div>
+                                                                </div>
+                                                                    <input type="text" name="email" value="<?php echo $email;?>" placeholder="Email"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                                    <input type="telephone" name="phone" value="<?php echo $phone;?>" placeholder="Phone"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                                    <input type="text" name="location" value="<?php echo $location;?>"placeholder="Location"  class="text-black w-full px-4 py-2.5 mt-2  rounded-lg bg-slate-200">
+                                                                    <input type="hidden" name="id"  value="<?php echo $id;?>" placeholder="Patient Name"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">  <!-- using for pass the id value updatepatients_inc.php  and use type="hidden for hide the input in form "  -->
                                                                 </div>
                                                                 <hr class="mt-4">
                                                                 <div class="flex flex-row-reverse p-3 mr-3">

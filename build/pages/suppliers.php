@@ -220,17 +220,10 @@
             <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <?php
-                        if(isset($_SESSION['success'])) //show the success message in patients.php pass message in addpatient_inc.php
+                        if(isset($_SESSION['addsuccess'])) 
                         {
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['fail'])) //show the success message in patients.php pass message in addpatient_inc.php
-                        {
-                            echo $_SESSION['fail'];
-                            unset($_SESSION['fail']);
+                            echo $_SESSION['addsuccess'];
+                            unset($_SESSION['addsuccess']);
                         }
                     ?>
                     <?php
@@ -238,13 +231,6 @@
                         {
                             echo $_SESSION['updated'];
                             unset($_SESSION['updated']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['updatefailed'])) //show the success message in updatepatients.php pass message in updatepatient_inc.php
-                        {
-                            echo $_SESSION['updatefailed'];
-                            unset($_SESSION['updatefailed']);
                         }
                     ?>
                     <?php
@@ -291,10 +277,10 @@
                                 <tr >
                                     
                                     <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Supplier info</th>
-                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Phone No</th>
+                                    <th class="px-6 py-3 pl-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Phone No</th>
                                     <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
                                     <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Location</th>
-                                    <th colspan="3" class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
+                                    <th colspan="2" class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
                                     <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
                                     
                                 </tr>
@@ -315,7 +301,8 @@
                                             while($row = mysqli_fetch_assoc($result))
                                             {
                                                 $id=$row['id'];
-                                                $name=$row['name'];
+                                                $firstname=$row['firstname'];
+                                                $lastname=$row['lastname'];
                                                 $phone=$row['phone'];
                                                 $email=$row['email'];
                                                 $location=$row['location'];
@@ -332,7 +319,7 @@
                                                         <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user2" />
                                                         </div>
                                                         <div class="flex flex-col justify-center">
-                                                        <h6 class="mb-0 leading-normal text-sm"><?php echo $name; ?></h6>
+                                                        <h6 class="mb-0 leading-normal text-sm"><?php echo $firstname." ".$lastname; ?></h6>
                                                         <p class="mb-0 leading-tight text-xs text-slate-400"><?php echo $email; ?></p>
                                                         </div>
                                                     </div>
@@ -404,16 +391,14 @@
                                                     <span class="mb-0 font-semibold leading-tight text-xs"><?php echo $location; ?></span>
                                                     </td>
 
-                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href=".php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-blue-600 to-cyan-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">View</a>
-                                                    </td>
+                                                    <!-- <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                                    <a href=".php?id=<//?php echo $id;?>" class="bg-gradient-to-tl from-blue-600 to-cyan-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">View</a>
+                                                    </td> -->
 
-                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                                    <td class="p-2  leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
                                                     <a href="updateSuppliers.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
-                                                    </td>
 
-                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href="includes/deletesuppliers.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
+                                                    <a href="includes/deletesuppliers.php?id=<?php echo $id;?>" class=" bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
                                                     </td>
                                                 </tr>
                                                 </tbody>
