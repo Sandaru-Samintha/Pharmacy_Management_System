@@ -1,4 +1,4 @@
-<!--
+<<!--
 =========================================================
 * Soft UI Dashboard Tailwind - v1.0.5
 =========================================================
@@ -31,6 +31,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- Main Styling -->
     <link href="../assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
@@ -44,6 +45,7 @@
    <?php
       require "includes/sidebar.php";
    ?>
+
 
     <main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
       <!-- Navbar -->

@@ -93,9 +93,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Suppliers</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">New Invoice</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Suppliers</h6>
+            <h6 class="mb-0 font-bold capitalize">New Invoice</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -219,51 +219,8 @@
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
-                    <?php
-                        if(isset($_SESSION['addsuccess'])) 
-                        {
-                            echo $_SESSION['addsuccess'];
-                            unset($_SESSION['addsuccess']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['updated'])) //show the success message in updatepatients.php pass message in updatepatient_inc.php
-                        {
-                            echo $_SESSION['updated'];
-                            unset($_SESSION['updated']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['deleted'])) //show the success message in patients.php pass message in deletepatient.php
-                        {
-                            echo $_SESSION['deleted'];
-                            unset($_SESSION['deleted']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['deletefailed'])) //show the success message in patients.php pass message in deletepatinet.php
-                        {
-                            echo $_SESSION['deletefailed'];
-                            unset($_SESSION['deletefailed']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($statussucess))
-                        {
-                            echo $statussucess;
-                            unset($statussucess);
-                        }
-                    ?>
-                    <?php
-                        if(isset($statusfail)) 
-                        {
-                            echo $statusfail;
-                            unset($statusfail);
-                        }
-                    ?>
-
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 rounded-2xl">
-                        <h6>Suppliers Table</h6>
+                        <h6>Create New Invoice</h6>
                     </div>
 
                         <div class="flex-auto px-0 pt-0 pb-0">
@@ -272,137 +229,98 @@
                                 <thead class="align-bottom">
                                 <tr >
                                     
-                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Supplier info</th>
-                                    <th class="px-6 py-3 pl-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Phone No</th>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
+                                    <th class="px-10 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer Name</th>
+                                    <th class="px-6 py-3 pl-12 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Contact Number</th>
                                     <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Location</th>
-                                    <th colspan="2" class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Invoice Number</th>
+                                    <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Date</th>
+                                    <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Payament Type</th>
                                     <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
                                     
                                 </tr>
                                 </div>
                                 </thead>
         
+                                <tbody>
+                                <tr>
+                                    <td class="p-2  align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    <form action="submit"  method="post">
+                                      <select name="customername" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  width=1'10px'   bg-slate-200 border border-gray-600"  style="width: 5cm;" >
+                                        <option class="text-center" disabled selected>Customer Name</option>
 
-                                <?php
+                                          <?php
+                                            $sql3 = "SELECT firstname,lastname FROM customers";
 
-                                    $sql="SELECT * FROM suppliers";
-                                    $result=mysqli_query($connect,$sql);
-
-                                    if($result==true)
-                                    {
-                                        $count=mysqli_num_rows($result);
-                                        if($count>0)
-                                        {
-                                            while($row = mysqli_fetch_assoc($result))
+                                            $result3=mysqli_query($connect,$sql3);
+                                            $checkresult3=mysqli_num_rows($result3);
+                                            if($checkresult3>0)
                                             {
-                                                $id=$row['id'];
-                                                $firstname=$row['firstname'];
-                                                $lastname=$row['lastname'];
-                                                $phone=$row['phone'];
-                                                $email=$row['email'];
-                                                $location=$row['location'];
-                                                $status=$row['status'];
+                                              while($row=mysqli_fetch_assoc($result3))
+                                              {
+                                                ?>
+                                                    <option class="text-center" value="<?php echo $row['firstname']." ".$row['lastname'];?>"><?php echo $row['firstname']." ".$row['lastname'];?></option>
 
-                                ?>
-                                                <tbody  >
+                                                    
+                                                      <input type="hidden" name="firstname" value="<?php echo $row['firstname']?>">
+                                                      <input type="hidden" name="lastname" value="<?php echo $row['lastname']?>">
                                                 
-                                    
-                                                <tr>
-                                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <div class="flex px-2 py-1">
-                                                        <div>
-                                                        <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user2" />
-                                                        </div>
-                                                        <div class="flex flex-col justify-center">
-                                                        <h6 class="mb-0 leading-normal text-sm"><?php echo $firstname." ".$lastname; ?></h6>
-                                                        <p class="mb-0 leading-tight text-xs text-slate-400"><?php echo $email; ?></p>
-                                                        </div>
-                                                    </div>
-                                                    </td>
-
-                                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $phone;?></p>
-                                                    </td>
-
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <?php
-                                                            if($status==1)
-                                                            {
-                                                                ?>
-                                                                <div class="relative">
-                                                                <button dropdown-trigger aria-expanded="false" type="button"  class="bg-gradient-to-tl from-green-600 to-lime-300 px-3 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Active</button>
-
-                                                                <ul dropdown-menu class="z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown pointer-events-none absolute left-auto top-1/2 m-0 -mr-4 mt-2 list-none rounded-lg border-1 border-solid border-transparent bg-white bg-clip-padding px-1 py-1 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8']"  >
-
-                                                                <form method="post">
-                                                                <input type="hidden" value="<?php echo $status;?>" name="status">
-                                                                <input type="hidden" value="<?php echo $id;?>" name="id">
-
-
-                                                                <li>
-                                                                <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-2 text-center font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700 dark:text-white dark:hover:bg-gray-200/80 dark:hover:text-slate-700 lg:transition-colors lg:duration-300" href="../pages/suppliers.php">Active</a>
-                                                                </li>
-                                                                <li>
-                                                                <button ype="submit" name="submit" class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-2 text-center font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700 dark:text-white dark:hover:bg-gray-200/80 dark:hover:text-slate-700 lg:transition-colors lg:duration-300">Inactive</button>
-                                                                
-                                                                </li>
-                                                                </form>
-
-                                                                </ul>
-                                                                </div>
-                                                                <!-- echo "Active"; -->
-                                                                <?php
-                                                            }
-                                                            else
-                                                            {
-                                                                ?>
-                                                                <div class="relative">
-                                                                <button dropdown-trigger aria-expanded="false" type="button" name="submit" class="bg-gradient-to-tl from-slate-600 to-slate-300 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Inactive</button>
-
-                                                                <ul dropdown-menu class="z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown pointer-events-none absolute left-auto top-1/2 m-0 -mr-4 mt-2 list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-1 py-1 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8']"  >
-
-                                                                <form method="post">
-                                                                <input type="hidden" value="<?php echo $status;?>" name="status">
-                                                                <input type="hidden" value="<?php echo $id;?>" name="id">
-
-                                                                <li>
-                                                                <button ype="submit" name="submit"class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-2 text-center font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700 dark:text-white dark:hover:bg-gray-200/80 dark:hover:text-slate-700 lg:transition-colors lg:duration-300">Active</button>
-                                                                </li>
-                                                                <li>
-                                                                <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-2 text-center font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700 dark:text-white dark:hover:bg-gray-200/80 dark:hover:text-slate-700 lg:transition-colors lg:duration-300" href="../pages/suppliers.php">Inactive</a>
-                                                                </li>
-                                                                </form>
-                                                                
-                                                                </ul>
-                                                                </div>
-                                                                <!-- echo "Inactive"; -->
-                                                                <?php
-                                                            }
-                                                        ?>
-                                                    </span>
-                                                    </td>
-
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                    <span class="mb-0 font-semibold leading-tight text-xs"><?php echo $location; ?></span>
-                                                    </td>
-
-                                                    <!-- <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href=".php?id=<//?php echo $id;?>" class="bg-gradient-to-tl from-blue-600 to-cyan-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">View</a>
-                                                    </td> -->
-
-                                                    <td class="p-2  leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <a href="updateSuppliers.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
-
-                                                    <a href="includes/deletesuppliers.php?id=<?php echo $id;?>" class=" bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            <?php
+                                                <?php
+                                              }
                                             }
+                                          ?>
+
+                                      </select>
+                                      </form>
+                                    </td>
+                                    
+                                    
+
+                                    <?php
+                                      if(isset($_POST['customername']))
+                                      {
+                                        $firstname = $_POST[$row['firstname']];
+                                        $lastname=$_POST[$row['lastname']];
+                                        $sql4="SELECT phone,location,id FROM customers WHERE firstname = $firstname AND lastname=$lastname";
+
+                                        $result4=mysqli_query($connect,$sql4);
+                                        $checkresult4=mysqli_num_rows($result4);
+                                        if($checkresult4>0)
+                                        {
+                                          while($row1=mysqli_fetch_assoc($result4))
+                                          {
+                                            $invoicenumber=$row1['id'];
+                                            $phone=$row['phone'];
+                                            $location=$row['location'];
+                                            var_dump($phone);
+                                            
+                                          }
                                         }
-                                    }
-                                    ?>
+                                      }
+                                        
+                                    ?>     
+                                
+                                    
+
+                            
+                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" value="<?php echo $location?>">
+                                    </td>
+
+                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" value="<?php echo $invoicenumber;?>">
+                                    </td>
+
+                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <input type="date" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" >
+                                    </td>
+
+                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" value="<?php echo $firstname." ".$lastname;?>">
+                                    </td>
+
+                                    </tr>
+                                    </tbody>
+                                                                                                                                      
                                     </table>
                                 </div>
                             </div>
