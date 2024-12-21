@@ -273,7 +273,7 @@
                                                                     <div class="flex-grow w-1/2 pr-2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Category</label>
                                                                         <select  name="category" id="dropdown" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200 font-medium" >
-                                                                        <option value="category" name="category"  ><?php echo $category ;?></option>
+                                                                        <option value="<?php echo $category ;?>" name="category"  ><?php echo $category ;?></option>
                                                                         <option value="Antibiotic">Antibiotic</option>
                                                                         <option value="Painkiller">Painkiller</option>
                                                                         <option value="Antipyretic">Antipyretic</option>
@@ -288,7 +288,7 @@
                                                                     <div class="flex-grow w-1/2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Medicine Type</label>
                                                                         <select  name="medicinetype"  class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200 font-medium" >
-                                                                        <option value="medicinetype" name="medicinetype"  ><?php echo $medicinetype ;?></option>
+                                                                        <option value="<?php echo $medicinetype ;?>" name="medicinetype"  ><?php echo $medicinetype ;?></option>
                                                                         <option value="Tablet">Tablet</option>
                                                                         <option value="Capsule">Capsule</option>
                                                                         <option value="Syrup">Syrup</option>
@@ -296,6 +296,7 @@
                                                                         <option value="Cream">Cream/Ointment</option>
                                                                         <option value="Drops">Drops</option>
                                                                         </select>
+                                                                        
                                                                         
                                                                     </div>
                                                                 </div>
@@ -322,8 +323,27 @@
                                                             
                                                             <div class="px-5 pb-5 ">
                                                               <label class="ml-4 font-bold text-xs text-slate-500">Supplier Name</label>
-                                                              <input value="<?php echo $suppliername ;?>"  type="text" placeholder="Supplier Name" name="suppliername" class="text-black font-medium w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
-                                                              </a>
+                                                              <select   type="text" placeholder="Supplier Name" name="suppliername" class="text-black font-medium w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200" >
+                                                                <option value="<?php echo $suppliername ;?>"><?php echo $suppliername ;?></option>
+                                                                <?php
+
+                                                                  $sql1="SELECT firstname,lastname from suppliers";
+                                                                  $result1= mysqli_query($connect,$sql1);
+                                                                  $checkresult1=mysqli_num_rows($result1);
+
+                                                                  if($checkresult1>0)
+                                                                  {
+                                                                    while($row=mysqli_fetch_assoc($result1))
+                                                                    {
+                                                                      ?>
+                                                                          <option value="<?php echo $row['firstname']." ".$row['lastname'] ;?>"><?php echo $row['firstname']." ".$row['lastname'] ;?></option>
+                                                                      <?php
+                                                                    }
+                                                                  }
+                                                                ?>
+                                                              </select>
+                                                              
+
                                                                 <div class="flex">
                                                                     <div class="flex-grow w-1/2 pr-2">
                                                                         <label class="ml-4 font-bold text-xs text-slate-500">Stock Quantity</label>

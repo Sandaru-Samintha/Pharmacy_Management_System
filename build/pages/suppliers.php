@@ -16,17 +16,17 @@
             $newstatus=1;
         }
 
-        $sql= "UPDATE suppliers SET status=$newstatus WHERE id=$id";
+        $sql2= "UPDATE suppliers SET status=$newstatus WHERE id=$id";
 
-        $result = mysqli_query($connect,$sql);
-        if($result==true)
+        $result2 = mysqli_query($connect,$sql2);
+        if($result2==true)
         {
-            $_SESSION["changedstatus"]="<div class='flex justify-center items-center bg-gradient-to-tl from-green-400 to-lime-400 text-white'>Successfully changed the status</div>";
+            $statussucess="<div class='flex justify-center items-center bg-gradient-to-tl from-green-400 to-lime-400 text-white'>Successfully changed</div>";
             header("Location:suppliers.php");
         }
         else
         {
-            $_SESSION["failchangedstatus"]="<div class='bg-gradient-to-tl from-red-400 to-orange-400 text-white'>Failed to change, try again..!</div>";
+            $statusfail="<div class='bg-gradient-to-tl from-red-600 to-orange-400 text-white'>Failed to change, try again..!</div>";
             header("Location:suppliers.php");
         } 
     }
@@ -248,23 +248,19 @@
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['changedstatus'])) 
+                        if(isset($statussucess))
                         {
-                            echo $_SESSION['changedstatus'];
-                            unset($_SESSION['changedstatus']);
+                            echo $statussucess;
+                            unset($statussucess);
                         }
                     ?>
                     <?php
-                        if(isset($_SESSION['failchangedstatus'])) 
+                        if(isset($statusfail)) 
                         {
-                            echo $_SESSION['failchangedstatus'];
-                            unset($_SESSION['failchangedstatus']);
+                            echo $statusfail;
+                            unset($statusfail);
                         }
                     ?>
-
-
-
-
 
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 rounded-2xl">
                         <h6>Suppliers Table</h6>

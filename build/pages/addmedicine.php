@@ -275,7 +275,43 @@
                                                     </div>
                                                     
                                                     <div class="px-5 pb-5">
-                                                    <input type="text" placeholder="Supplier Name" name="suppliername" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">   
+                                                    <select type="text" placeholder="Supplier Name" name="suppliername" class="text-black w-full px-4 py-2.5 mt-2 rounded-lg bg-slate-200">
+                                                    <option value="Supplier Name" disabled selected>Supplier Name</option>
+                                                      <?php 
+                                                      
+                                                        $sql="SELECT firstname,lastname from suppliers";
+
+                                                        $result=mysqli_query($connect,$sql);
+                                                        $checkresult=mysqli_num_rows($result);
+                                                        if($checkresult>0)
+                                                        {
+                                                          while($row=mysqli_fetch_assoc($result))
+                                                          {
+                                                            ?>
+
+                                                                <option value="<?php echo $row['firstname']." ".$row['lastname']?>"><?php echo $row['firstname']." ".$row['lastname']?></option>
+
+                                                            <?php
+                                                          }
+                                                        }
+                                                      
+                                                      
+                                                      
+                                                      ?>
+
+                                                    </select> 
+                                                    
+                                                    
+
+
+
+
+
+
+
+
+
+
                                                         <div class="flex">
                                                             <div class="flex-grow w-1/2 pr-2">
                                                                 <a class="flex space-x-10 flex items-center font-medium tarnking-wide bg-gradient-to-tl from-blue-600 to-cyan-400 text-white w-full px-4 py-2.5 mt-2 rounded-lg " href="addsuppliers.php">
