@@ -223,7 +223,7 @@
                         <h6>Create New Invoice</h6>
                     </div>
 
-                        <div class="flex-auto px-0 pt-0 pb-0">
+                        <div class="flex-auto px-0 pt-0 pb-2">
                             <div class="p-0 "> 
                             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                                 <thead class="align-bottom">
@@ -264,7 +264,7 @@
                                           ?>
                                       </select>
                                   </form>
-                              </td>
+                                </td>
 
 
                                     
@@ -302,20 +302,44 @@
                                                     $invoicenumber;//id
                                                     $phone;
                                                     $location;
-                                                    ?>
+                                            }
+                                          }
+                                        }
+                                        ?>
 
 
                                               <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                  <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php echo $phone;?>">
+                                                  <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php
+                                                  
+                                                  if(isset($phone))
+                                                  {
+                                                    echo $phone;
+                                                  }
+                                                  ?>">
                                               </td>
 
                                       
                                               <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php echo $location?>">
+                                                <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
+                                                
+                                                if(isset($location))
+                                                  {
+                                                    echo $location;
+                                                  }
+                                                
+                                                ?>">
                                               </td>
 
                                               <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php echo $invoicenumber;?>">
+                                                <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
+                                                
+                                                if(isset($invoicenumber))
+                                                  {
+                                                    echo $invoicenumber;
+                                                  }
+                                                
+                                                
+                                                ?>">
                                               </td>
 
                                               <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -331,22 +355,191 @@
                                                 <option value="net_banking">Net Banking</option>
                                                 </Select>
                                               </td>
+                                    </tr>
+                                      <td>
+                                        <div class="flex">
+                                        <div class="p-2 pl-5">
+                                            <a class="flex space-x-3 flex items-center font-semibold text-xs  bg-gradient-to-tl from-blue-600 to-cyan-400 text-white  px-7 py-2.5 pl-3  rounded-lg " href="addcustomers.php">
+                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                              </svg>
+                                                <span>Add New Customer</span>
+                                            </a>
+                                        </div>
+                                        </div>
+                                      </td>
+                                    </tr>
 
-                                              <?php
+                                    <tr>
+                                      <td colspan="6" class="pt-2">
+                                      <hr style="width: 100%; border: 1px solid black;">
+                                      </td>
+                                    </tr>
 
-                                            }
-                                        }
-                                      }
-                                        
-                                    ?>     
-                                
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                      <div class="p-6 pb-0 mb-0 bg-white border-b-0 rounded-2xl">
+                        <h6>Create New Invoice</h6>
+                      </div>
+
+                      <div class="flex-auto px-0 pt-0 pb-2">
+                            <div class="p-0 "> 
+                            <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                                <thead class="align-bottom">
+                                <tr >
+                                    
+                                    <th class="px-14 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer Name</th>
+                                    <th class="px-6 py-3 pl-12 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Contact Number</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Location</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Invoice Number</th>
+                                    <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Date</th>
+                                    <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Payament Type</th>
+                                    <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
+                                    
+                                </tr>
+                                </div>
+                                </thead>
+        
+                                <tbody>
+                                <tr>
+                                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                  <form method="post">
+                                      <select name="customername" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black bg-slate-200 border border-gray-600" style="width: 5cm;" onchange="this.form.submit()">
+                                          <option class="text-center" disabled <?php echo !isset($_POST['customername']) ? 'selected' : ''; ?>>Select Customer Name</option>
+
+                                          <?php
+                                          $sql3 = "SELECT firstname, lastname FROM customers";
+                                          $result3 = mysqli_query($connect, $sql3);
+
+                                          if (mysqli_num_rows($result3) > 0) {
+                                              while ($row = mysqli_fetch_assoc($result3)) {
+                                                  $fullName = $row['firstname'] . " " . $row['lastname'];
+                                                  $isSelected = (isset($_POST['customername']) && $_POST['customername'] === $fullName) ? 'selected' : '';
+                                                  ?>
+                                                  <option class="text-center" value="<?php echo $fullName; ?>" <?php echo $isSelected; ?>><?php echo $fullName; ?></option>
+                                                  <?php
+                                              }
+                                          }
+                                          ?>
+                                      </select>
+                                  </form>
+                                </td>
+
+
+                                    
                                     
 
+                                    <?php
+                                      if(isset($_POST['customername']))
+                                      {
+                                        $customerName = $_POST['customername'];
+
+                                        // Split the full name into firstname and lastname
+                                        $nameParts = explode(" ", $customerName, 2); // Split into two parts
+                                        $firstname = $nameParts[0];
+                                        $lastname = isset($nameParts[1]) ? $nameParts[1] : '';
+
+                                        // Use prepared statements to prevent SQL injection
+                                        $sql4 = "SELECT phone, location, id FROM customers WHERE firstname = ? AND lastname = ?";
+                                        $stmt = mysqli_prepare($connect, $sql4);
+
+                                        if ($stmt) 
+                                        {
+                                            // Bind parameters
+                                            mysqli_stmt_bind_param($stmt, "ss", $firstname, $lastname);
+                                            
+                                            // Execute the statement
+                                            mysqli_stmt_execute($stmt);
+                                            
+                                            // Bind result variables
+                                            mysqli_stmt_bind_result($stmt, $phone, $location, $invoicenumber);
+                                            
+                                            // Fetch results
+                                            while (mysqli_stmt_fetch($stmt))
+                                            {
+                                              
+                                                    $invoicenumber;//id
+                                                    $phone;
+                                                    $location;
+                                            }
+                                          }
+                                        }
+                                        ?>
+
+
+                                              <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                  <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php
+                                                  
+                                                  if(isset($phone))
+                                                  {
+                                                    echo $phone;
+                                                  }
+                                                  ?>">
+                                              </td>
+
+                                      
+                                              <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
+                                                
+                                                if(isset($location))
+                                                  {
+                                                    echo $location;
+                                                  }
+                                                
+                                                ?>">
+                                              </td>
+
+                                              <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
+                                                
+                                                if(isset($invoicenumber))
+                                                  {
+                                                    echo $invoicenumber;
+                                                  }
+                                                
+                                                
+                                                ?>">
+                                              </td>
+
+                                              <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <input type="date" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" >
+                                              </td>
+
+                                              <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <Select class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-5   bg-slate-200 border border-gray-600" value="">
+                                                <option value="cash">Cash Payment</option>
+                                                <option value="credit_card">Credit Card</option>
+                                                <option value="debit_card">Debit Card</option>
+                                                <option value="upi">UPI</option>
+                                                <option value="net_banking">Net Banking</option>
+                                                </Select>
+                                              </td>
                                     </tr>
-                                    </tbody>
-                                                                                                                                      
-                                    </table>
-                                </div>
+                                      <td>
+                                        <div class="flex">
+                                        <div class="p-2 pl-5">
+                                            <a class="flex space-x-3 flex items-center font-semibold text-xs  bg-gradient-to-tl from-blue-600 to-cyan-400 text-white  px-7 py-2.5 pl-3  rounded-lg " href="addcustomers.php">
+                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                              </svg>
+                                                <span>Add New Customer</span>
+                                            </a>
+                                        </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td colspan="6" class="pt-2">
+                                      <hr style="width: 100%; border: 1px solid black;">
+                                      </td>
+                                    </tr>
+
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
                         </div>
                     </div>
