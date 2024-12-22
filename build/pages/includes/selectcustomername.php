@@ -13,7 +13,7 @@
             $lastname = isset($nameParts[1]) ? $nameParts[1] : '';
 
             // Use prepared statements to prevent SQL injection
-            $sql4 = "SELECT phone, location, id FROM customers WHERE firstname = ? AND lastname = ?";
+            $sql4 = "SELECT phone, location, id,lastname,firstname FROM customers WHERE firstname = ? AND lastname = ?";
             $stmt = mysqli_prepare($connect, $sql4);
 
             if ($stmt) 
@@ -25,7 +25,7 @@
                 mysqli_stmt_execute($stmt);
                                                             
                 // Bind result variables
-                mysqli_stmt_bind_result($stmt, $phone, $location, $invoicenumber);
+                mysqli_stmt_bind_result($stmt, $phone, $location, $invoicenumber,$lastname,$firstname);
                                                             
                 // Fetch results
                 mysqli_stmt_fetch($stmt);
@@ -36,6 +36,7 @@
                 $_SESSION["phone"]=$phone;
                 $_SESSION["location"]=$location;
                 $_SESSION["invoicenumber"]=$invoicenumber;
+                $_SESSION["customername"]=$firstname." ".$lastname;
                 header("Location:../newinvoice.php");
             }
         }

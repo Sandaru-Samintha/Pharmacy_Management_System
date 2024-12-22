@@ -219,8 +219,8 @@
                                 <tr>
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                   <form action="includes/selectcustomername.php" method="post">
-                                      <select name="customername" style="width: 5cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black bg-slate-200 border border-gray-600" style="width: 5cm;"  onchange="this.form.submit()">
-                                          <option class="text-center" disabled selected >Select Customer Name</option>
+                                      <select name="customername" style="width: 5cm;" class="mb-0 py-2 font-semibold text-xs  bg-gradient-to-tl from-slate-600 to-slate-400 rounded-1.8 text-white  border border-gray-600"   onchange="this.form.submit()">
+                                          <option class="text-center" disabled selected value="">Select Customer Name</option>
 
                                           <?php
 
@@ -233,7 +233,7 @@
                                                 {
                                                     $fullName = $row['firstname'] . " " . $row['lastname'];
                                                     ?>
-                                                    <option class="text-center" value="<?php echo $fullName; ?>"><?php echo $fullName; ?></option>
+                                                    <option class="text-black text-center text-s" value="<?php echo $fullName; ?>"><?php echo $fullName; ?></option>
                                                     <?php
                                                 }
                                             }
@@ -303,8 +303,8 @@
                                     <tr>
                                       <td>
                                         <div class="flex">
-                                        <div class="p-2 pl-4">
-                                            <a class="flex space-x-3 flex items-center font-semibold text-xs  bg-gradient-to-tl from-blue-600 to-cyan-400 text-white  px-7 py-2.5 pl-3  rounded-lg " href="addcustomers.php">
+                                        <div class="p-2 pl-2">
+                                            <a class="flex space-x-4 flex items-center font-semibold text-xs  bg-gradient-to-tl from-blue-600 to-cyan-400 text-white  px-7 py-2.5 pl-3  rounded-lg " style="width: 5cm;" href="addcustomers.php">
                                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                               </svg>
@@ -316,7 +316,7 @@
                                     </tr>
 
                                     <tr>
-                                      <td colspan="6" class="pt-8">
+                                      <td colspan="7" class="pt-10">
                                       <hr style="width: 100%; border: 2px solid black;">
                                       </td>
                                     </tr>
@@ -325,7 +325,7 @@
                                 </table>
                               </div>
                             </div>
-                            <div class="flex-auto px-0 pt-0 pb-2 pr-2">
+                            <div class="flex-auto px-0 pt-2 pb-2 pr-2">
                               <div class="p-0 overflow-x-auto"> 
                                 <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                                   <thead class="align-bottom">
@@ -338,7 +338,7 @@
                                     <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Selling Price</th>
                                     <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Req.Quantity</th>
                                     <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Total</th>
-                                    <th class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
+                                    <th colspan="2" class="px-6 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
                                     <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
                                     
                                 </tr>
@@ -349,7 +349,7 @@
                                 <tr>
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                           <form action="includes/selectmedicinename.php" method="post">
-                                              <select name="medicinename" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black bg-slate-200 border border-gray-600" style="width: 4cm;" onchange="this.form.submit()">
+                                              <select name="medicinename" class="mb-0 py-2 font-semibold text-center leading-tight font-semibold text-xs  bg-gradient-to-tl from-slate-600 to-slate-400 rounded-1.8 text-white border border-gray-600" style="width: 4cm;" onchange="this.form.submit()">
                                                   <option class="text-center" disabled selected>Select Medicine</option>
                                                   <?php
                                                     $sql5 = "SELECT medicinename FROM medicines";
@@ -361,7 +361,7 @@
                                                         {
                                                             $medicinename = $row['medicinename'];
                                                             ?>
-                                                            <option class="text-center" value="<?php echo $medicinename; ?>" ><?php echo $medicinename; ?></option>
+                                                            <option class="text-black text-center text-s" value="<?php echo $medicinename; ?>" ><?php echo $medicinename; ?></option>
                                                             <?php
                                                         }
                                                   }
@@ -369,72 +369,59 @@
                                               </select>
                                           </form>
                                       </td>
+                                    </tr>
 
-                                      <?php
-                                      if (isset($_POST['medicinename'])) {
-                                          $medicinename = $_POST['medicinename'];
-
-                                          // Use prepared statements to prevent SQL injection
-                                          $sql4 = "SELECT batchnumber, expirydate, quantity, sellingprice FROM medicines WHERE medicinename = ?";
-                                          $stmt = mysqli_prepare($connect, $sql4);
-
-                                          if ($stmt) {
-                                              // Bind parameters
-                                              mysqli_stmt_bind_param($stmt, "s", $medicinename);
-
-                                              // Execute the statement
-                                              mysqli_stmt_execute($stmt);
-
-                                              // Bind result variables
-                                              mysqli_stmt_bind_result($stmt, $batchnumber, $expirydate, $quantity, $sellingprice);
-
-                                              // Fetch results
-                                              mysqli_stmt_fetch($stmt);
-
-                                              // Close the statement
-                                              mysqli_stmt_close($stmt);
-                                          }
-                                      }
-                                      ?>
+                                    <tr>
+                                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                          <input style="width: 4cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['medicinename']) ? $_SESSION['medicinename'] : ''; ?>">
+                                      </td>
 
                                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($batchnumber) ? $batchnumber : ''; ?>">
+                                          <input class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['batchnumber']) ? $_SESSION['batchnumber'] : ''; ?>">
                                       </td>
 
                                       <td class="pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($quantity) ? $quantity : ''; ?>">
+                                          <input style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['quantity']) ? $_SESSION['quantity'] : ''; ?>">
                                       </td>
 
                                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($expirydate) ? $expirydate : ''; ?>">
+                                          <input style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['expirydate']) ? $_SESSION['expirydate'] : ''; ?>">
                                       </td>
 
                                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($sellingprice) ? "LKR . ". $sellingprice  : ''; ?>">
+                                          <input style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['sellingprice']) ? "LKR . ".$_SESSION['sellingprice'] : ''; ?>">
                                       </td>
 
-                                      <td class="pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <select style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
-                                              <option value="cash">Cash Payment</option>
-                                              <option value="credit_card">Credit Card</option>
-                                              <option value="debit_card">Debit Card</option>
-                                              <option value="upi">UPI</option>
-                                              <option value="net_banking">Net Banking</option>
-                                          </select>
+                                      <td class="p-2 pl-7 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                          <input type="number" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
                                       </td>
 
-                                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="date" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
+                                      <td class="p-2 pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                          <input type="text" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
                                       </td>
 
-                                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="date" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
+                                      <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+
+                                        <a href="updatemedicines.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap r align-baseline leading-none ">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="size-5">
+                                          <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clip-rule="evenodd" />
+                                        </svg>
+
+                                        </a>
                                       </td>
-                                      <tr>
-                                          <td colspan="6" class="pt-2">
-                                              <hr style="width: 100%; border: 1px solid black;">
-                                          </td>
-                                      </tr>
+
+                                      <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+
+                                        <a href="includes/deletemedicines.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap  align-baseline  leading-none ">
+
+                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="size-5">
+                                            <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z" clip-rule="evenodd" />
+                                          </svg>
+
+                                        </a>
+                                      </td>
+                                      
 
 
                                   </tbody>
