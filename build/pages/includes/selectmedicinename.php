@@ -7,7 +7,7 @@
         $medicinename = $_POST['medicinename'];
 
         // Use prepared statements to prevent SQL injection
-        $sql4 = "SELECT batchnumber, expirydate, quantity, sellingprice,medicinename FROM medicines WHERE medicinename = ?";
+        $sql4 = "SELECT batchnumber, expirydate, quantity, sellingprice,medicinename,id FROM medicines WHERE medicinename = ?";
         $stmt = mysqli_prepare($connect, $sql4);
 
         if ($stmt) 
@@ -19,7 +19,7 @@
             mysqli_stmt_execute($stmt);
 
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $batchnumber, $expirydate, $quantity, $sellingprice,$medicinename);
+            mysqli_stmt_bind_result($stmt, $batchnumber, $expirydate, $quantity, $sellingprice,$medicinename,$id);
 
             // Fetch results
             mysqli_stmt_fetch($stmt);
@@ -32,6 +32,7 @@
             $_SESSION['quantity']=$quantity;
             $_SESSION['sellingprice']=$sellingprice;
             $_SESSION['medicinename']=$medicinename;
+            $_SESSION['id']=$id;
             header("Location:../newinvoice.php");
         }
     }

@@ -191,6 +191,13 @@
         <!-- table Suppliers -->
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
+              <?php
+                if(isset($_SESSION['greterthanquantity']))
+                {
+                  echo $_SESSION['greterthanquantity'];
+                  unset($_SESSION['greterthanquantity']);
+                }
+              ?>
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 rounded-2xl">
                         <h6>Create New Invoice</h6>
@@ -287,7 +294,7 @@
                                 </td>
 
                                 <td class="pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <input type="date" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" >
+                                <input  class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" value="<?php echo isset($_SESSION["currentdate"]) ? $_SESSION["currentdate"] : ''; ?>" style="width: 3cm;" readonly >
                                 </td>
 
                                 <td class="pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -369,6 +376,18 @@
                                               </select>
                                           </form>
                                       </td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+
+                                      <td class="p-2 pl-7 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                          <form action="includes/selectquantity.php" onchange="this.form.submit()"  method="post">
+                                              <input name="requantity" type="number" min="0" max="<?php echo isset($_SESSION['quantity']) ? $_SESSION['quantity'] : ''; ?>" class="mb-0 py-2 font-semibold text-center leading-tight font-semibold text-xs text-black   rounded-1.8  border border-gray-600"  style="width: 2cm;"value="requantity"   >
+                                              <input type="hidden" name="id" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>">
+                                          </form>
+                                      </td>
+                                      <td></td>
                                     </tr>
 
                                     <tr>
@@ -380,24 +399,26 @@
                                           <input class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['batchnumber']) ? $_SESSION['batchnumber'] : ''; ?>">
                                       </td>
 
-                                      <td class="pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <td class="p-2 pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                           <input style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['quantity']) ? $_SESSION['quantity'] : ''; ?>">
                                       </td>
 
-                                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <td class="p-2 pl-5 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                           <input style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['expirydate']) ? $_SESSION['expirydate'] : ''; ?>">
                                       </td>
 
-                                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                      <td class="p-2 pl-5 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                           <input style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['sellingprice']) ? "LKR . ".$_SESSION['sellingprice'] : ''; ?>">
                                       </td>
-
+                                        
                                       <td class="p-2 pl-7 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="number" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
+                                        <form  method="post">
+                                          <input type="number" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo isset($_SESSION['requantity']) ?$_SESSION['requantity']  : ''; ?>">
+                                        </form>
                                       </td>
-
+                                      
                                       <td class="p-2 pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="text" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
+                                          <input type="text" value="<?php echo isset($_SESSION['total']) ?"LKR . ".$_SESSION['total']: ''; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
                                       </td>
 
                                       <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">

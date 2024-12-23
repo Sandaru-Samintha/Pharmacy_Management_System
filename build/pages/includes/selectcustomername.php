@@ -37,6 +37,7 @@
                 $_SESSION["location"]=$location;
                 $_SESSION["invoicenumber"]=$invoicenumber;
                 $_SESSION["customername"]=$firstname." ".$lastname;
+                $_SESSION["currentdate"]=date('Y-m-d');
                 header("Location:../newinvoice.php");
             }
         }
