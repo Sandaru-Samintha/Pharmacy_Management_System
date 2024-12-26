@@ -212,6 +212,13 @@
                             unset($_SESSION['deletefailed']);
                         }
                     ?>
+                     <?php
+                        if(isset($_SESSION['success'])) ////show the success message in updateMedicines.php pass message in updatepatient_inc.php
+                        {
+                            echo $_SESSION['success'];
+                            unset($_SESSION['success']);
+                        }
+                    ?>
 
 
 
