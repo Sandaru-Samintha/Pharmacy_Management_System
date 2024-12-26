@@ -5,13 +5,18 @@
 
     if(isset($_POST['add']))
     {
+        $valueWithPrefix1=$_POST['invsellingprice'];
+        $invsellingprice= str_replace("LKR . ", "", $valueWithPrefix1);
+
+        $valueWithPrefix2=$_POST['invtotal'];
+        $invtotal= str_replace("LKR . ", "", $valueWithPrefix2);
+
         $invmedicinename=$_POST['invmedicinename'];
         $invbatchnumber=$_POST['invbatchnumber'];
         $invquantity=$_POST['invquantity'];
         $invexpirydate=$_POST['invexpirydate'];
-        $invsellingprice=$_POST['invsellingprice'];
         $invrequantity=$_POST['invrequantity'];
-        $invtotal=$_POST['invtotal'];
+        
 
 
         $sql= "INSERT INTO selectcustomermedicine(invmedicinename,invbatchnumber,invquantity,invexpirydate,invsellingprice,invrequantity,invtotal) VALUES ('$invmedicinename','$invbatchnumber','$invquantity','$invexpirydate','$invsellingprice','$invrequantity','$invtotal')";

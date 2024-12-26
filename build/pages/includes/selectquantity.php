@@ -29,8 +29,7 @@
         }
         else if($quantity >= $_POST['requantity'])
         {
-            $total=(($sellingprice*$requantity )+ 0.00); //these all session valuse pass from selectmedicinename.php
-            $newquantity=$quantity-$requantity;//these all session valuse pass from selectmedicinename.php
+            $total=($sellingprice * $requantity ); //these all session valuse pass from selectmedicinename.php
 
             $_SESSION['total']= $total ;
             $_SESSION['requantity']=$requantity;

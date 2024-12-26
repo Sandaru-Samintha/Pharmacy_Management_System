@@ -205,6 +205,13 @@
                   unset($_SESSION['successsavethemedicine']);
                 }
               ?>
+              <?php
+                if(isset($_SESSION["deletedsavedeitem"]))
+                {
+                  echo $_SESSION["deletedsavedeitem"];
+                  unset($_SESSION["deletedsavedeitem"]);
+                }
+              ?>
               
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 rounded-2xl">
@@ -374,7 +381,7 @@
                                       $totatalamount=0.00;
                                       while($row8=mysqli_fetch_assoc($result8))
                                       {
-                                        
+                                        $invid=$row8['id'];
                                         $invmedicinename=$row8['invmedicinename'];
                                         $invbatchnumber=$row8['invbatchnumber'];
                                         $invquantity=$row8['invquantity'];
@@ -390,6 +397,9 @@
                                         
 
                                           <tr><!--show the customer saved medicines details-->
+                                            <form action="includes/deletecustomerselectmedicine.php" method="post">
+
+                                            
 
                                             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 <input name="invmedicinename" style="width: 4cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invmedicinename ; ?>">
@@ -415,19 +425,20 @@
                                                 <input type="number" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo $invrequantity?>">
                                             </td>
                                             
-                                            <td class="p-2 pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                            <td class="p-2 pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 <input type="text" name="invtotal" value="<?php echo "LKR . ".$invtotal; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly>
                                             </td>
 
                                             <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
                                               
                                               <button type="submit" name="delete"  class="bg-gradient-to-tl from-red-600 to-yellow-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap r align-baseline leading-none ">
-
+                                              <input type="hidden" name="id" value="<?php echo $invid ; ?>">
                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="size-5">
                                               <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z" clip-rule="evenodd" />
                                             </svg>
                                               </button>
                                             </td>
+                                            </form>
                                             </tr>
 
                                         <?php
@@ -436,7 +447,7 @@
 
                                   ?>
 
-                                 
+                                
                                 
 
                                 
@@ -476,10 +487,12 @@
                                           </form>
                                       </td>
                                       
-                                      <td class="p-2 pt-8 pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input type="text" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo isset($totatalamount) ?"LKR . " .$totatalamount : '';?>">
-                                      </td>
-                                      <td></td>
+                                      <td class="p-2 pt-8 pl-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <input type="text" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 4cm;" class="mb-0 py-2 font-bold text-center leading-tight text-s text-black px-2 bg-slate-400 border border-gray-600"  readonly value="<?php echo isset($totatalamount) ?"LKR . " .$totatalamount : '';?>">
+                                      
+
+                                      <td class="p-2 pt-8  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"> Total Amount</td>
+                                      
                                     </tr>
                                   </div>
 
@@ -507,15 +520,15 @@
                                       </td>
 
                                       <td class="p-2 pl-5 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input name="invsellingprice" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['sellingprice']) ? $_SESSION['sellingprice'] : ''; ?>">
+                                          <input name="invsellingprice" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo isset($_SESSION['sellingprice']) ? "LKR . ".$_SESSION['sellingprice'] : ''; ?>">
                                       </td>
                                         
                                       <td class="p-2 pl-7 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                           <input type="number" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo isset($_SESSION['requantity']) ?$_SESSION['requantity']  : ''; ?>">
                                       </td>
                                       
-                                      <td class="p-2 pl-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="text" name="invtotal" value="<?php echo isset($_SESSION['total']) ?$_SESSION['total']: ''; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600">
+                                      <td class="p-2 pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                          <input type="text" name="invtotal" value="<?php echo isset($_SESSION['total']) ?"LKR . ".$_SESSION['total']: ''; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly>
                                       </td>
 
                                       <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
@@ -528,16 +541,6 @@
                                             }
                                         ?>
                                         
-                                      </td>
-
-                                      <!-- <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-
-                                        <a href="includes/deletemedicines.php?id=</*?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap  align-baseline  leading-none ">
-
-                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="size-5">
-                                            <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z" clip-rule="evenodd" />
-                                          </svg> -->
-                                        </a>
                                       </td>
                                       </form>
                                     </tr>
