@@ -213,6 +213,7 @@
                 }
               ?>
               
+              
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 rounded-2xl">
                         <h6>Create New Invoice</h6>
@@ -266,42 +267,46 @@
                                 </td>
 
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                  <input style="width: 5cm;"class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php
+                                  <input name="customername" style="width: 5cm;"class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php
                                                   
                                     if(isset($_SESSION["customername"]))
                                     {
                                       echo $_SESSION["customername"];
+                                      $_SESSION["custname"]=$_SESSION["customername"];
                                     }
                                     ?>">
                                 </td>
 
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                  <input style="width: 3cm;" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php
+                                  <input name="phone" style="width: 3cm;" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php
                                                   
                                     if(isset($_SESSION["phone"]))
                                     {
                                       echo $_SESSION["phone"];
+                                      $_SESSION["custphone"]=$_SESSION["phone"];
                                     }
                                     ?>">
                                 </td>
 
                                 <td class="pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                  <input class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
+                                  <input name="location" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
                                                                                   
                                   if(isset($_SESSION["location"]))
                                   {
                                       echo $_SESSION["location"];
+                                      $_SESSION["custlocation"]=$_SESSION["location"];
                                   }
                                                                                 
                                   ?>">
                                 </td>
 
                                 <td class="pl-5  align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                  <input style="width: 2cm;" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
+                                  <input name="invoicenumber" style="width: 2cm;" class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" readonly value="<?php 
                                                 
                                     if(isset($_SESSION["invoicenumber"]))
                                     {
                                       echo $_SESSION["invoicenumber"];
+                                      $_SESSION["custinvoicenumber"]=$_SESSION["invoicenumber"];
                                     }
                                                 
                                                 
@@ -309,16 +314,16 @@
                                 </td>
 
                                 <td class="pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <input  class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" value="<?php echo isset($_SESSION["currentdate"]) ? $_SESSION["currentdate"] : ''; ?>" style="width: 3cm;" readonly >
+                                <input name="date"  class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600" value="<?php echo isset($_SESSION["currentdate"]) ? $_SESSION["currentdate"] : ''; $_SESSION["custcurrentdate"]=$_SESSION["currentdate"];?>" style="width: 3cm;" readonly >
                                 </td>
 
                                 <td class="pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                  <Select class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-5   bg-slate-200 border border-gray-600" value="">
-                                    <option value="cash">Cash Payment</option>
-                                    <option value="credit_card">Credit Card</option>
-                                    <option value="debit_card">Debit Card</option>
-                                    <option value="upi">UPI</option>
-                                    <option value="net_banking">Net Banking</option>
+                                  <Select name='<?php $_SESSION["paymenttype"]=$paymenttype;?> '  class="mb-0  py-2 font-semibold text-center leading-tight text-xs text-black  px-3   bg-slate-200 border border-gray-600">
+                                  <option value='<?php echo$_SESSION["paymenttype"]="Cash Payment";?>'>Cash Payment</option>
+                                    <option value='<?php echo$_SESSION["paymenttype"]="Credit Card";?>'>Credit Card</option>
+                                    <option value='<?php echo$_SESSION["paymenttype"]="Debit Card";?>'>Debit Card</option>
+                                    <option value='<?php echo$_SESSION["paymenttype"]="UPI";?>'>UPI</option>
+                                    <option value='<?php echo$_SESSION["paymenttype"]="Net Banking";?>'>Net Banking</option> 
                                   </Select>
                                   </td>
                                 </tr>
@@ -402,31 +407,31 @@
                                             
 
                                             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input name="invmedicinename" style="width: 4cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invmedicinename ; ?>">
+                                                <input name="invmedicinename" style="width: 4cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php  echo $invmedicinename ;$_SESSION["custinvmedicinename"]=$invmedicinename; ?>">
                                             </td>
 
                                             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input name="invbatchnumber" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invbatchnumber; ?>">
+                                                <input name="invbatchnumber"   class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invbatchnumber;$_SESSION["custinvbatchnumber"]=$invbatchnumber;  ?>">
                                             </td>
 
                                             <td class="p-2 pl-4 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input name="invquantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invquantity?>">
+                                                <input name="invquantity"  style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invquantity;$_SESSION["custinvquantity"]=$invquantity;?>">
                                             </td>
 
                                             <td class="p-2 pl-5 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input name="invexpirydate" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invexpirydate ?>">
+                                                <input name="invexpirydate"  style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo $invexpirydate;$_SESSION["custinvexpirydate"]=$invexpirydate; ?>">
                                             </td>
 
                                             <td class="p-2 pl-5 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input name="invsellingprice" style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo "LKR . ".$invsellingprice; ?>">
+                                                <input name="invsellingprice"  style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly value="<?php echo "LKR . ".$invsellingprice;$_SESSION["custinvsellingprice"]=$invsellingprice; ?>">
                                             </td>
                                               
                                             <td class="p-2 pl-7 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input type="number" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo $invrequantity?>">
+                                                <input type="number" name="invrequantity"  min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo $invrequantity;$_SESSION["custinvrequantity"]=$invrequantity;?>">
                                             </td>
                                             
                                             <td class="p-2 pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input type="text" name="invtotal" value="<?php echo "LKR . ".$invtotal; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly>
+                                                <input type="text" name="invtotal"  value="<?php echo "LKR . ".$invtotal; $_SESSION["custinvtotal"]=$invtotal?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly>
                                             </td>
 
                                             <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
@@ -487,8 +492,19 @@
                                           </form>
                                       </td>
                                       
-                                      <td class="p-2 pt-8 pl-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <input type="text" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 4cm;" class="mb-0 py-2 font-bold text-center leading-tight text-s text-black px-2 bg-slate-400 border border-gray-600"  readonly value="<?php echo isset($totatalamount) ?"LKR . " .$totatalamount : '';?>">
+                                      <td class="p-2 pt-8 pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <input  type="text" name="totalamount" style="width: 3cm;" class="mb-0 py-2 font-bold text-center leading-tight text-xs  text-black px-2 bg-slate-400 border border-gray-600"  readonly value="<?php 
+                                                
+                                                if(isset($totatalamount))
+                                                {
+                                                  echo "LKR . " .$totatalamount ;
+                                                }
+                                                elseif(!isset($totatalamount))
+                                                {
+                                                  echo"LKR . 0.00";
+                                                }
+                                                ?>">
+                                                
                                       
 
                                       <td class="p-2 pt-8  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"> Total Amount</td>
@@ -524,7 +540,7 @@
                                       </td>
                                         
                                       <td class="p-2 pl-7 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="number" name="invrequantity" min="0" max="<?php $_SESSION['quantity']?>" name="requantity" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo isset($_SESSION['requantity']) ?$_SESSION['requantity']  : ''; ?>">
+                                          <input type="number" name="invrequantity" min="0" max="<?php echo isset($_SESSION['requantity']) ?$_SESSION['requantity']  : ''; ?>" style="width: 2cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  readonly value="<?php echo isset($_SESSION['requantity']) ?$_SESSION['requantity']  : ''; ?>">
                                       </td>
                                       
                                       <td class="p-2 pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -546,6 +562,80 @@
                                     </tr>
                                   </tbody>
                                 </table>
+                                <div class="flex-auto px-0 pt-14 pb-2 pr-2">
+                                  <div class="p-0 overflow-x-auto"> 
+                                    <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                                      
+                                      <tr >
+                                      <form action="includes/newinvoice_inc.php" method="post">
+                                      <td>
+                                      <div class="flex flex-row-reverse p-3 mr-3">
+                                                    <div class="flex-initial ">
+                                                        <button type="submit" name="submit"  class="flex space-x-2 flex items-center px-5 py-2 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
+                                                        <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                            <span >Save</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                      </td>
+                                      <td class="p-2 pl-10"></td>
+                                      <td class="p-2 pl-10 "></td>
+                                      <td class="p-2 pl-6"></td>
+                                      <td class="p-2 pl-6"></td>
+                                      <td class="p-2 pl-6"></td>
+
+                                      <td class="p-2 pl-15 ">
+                                          <a class="font-bold text-left text-xs uppercase align-middle">Net Total :</a>
+                                          <input type="text" id="totalamount" name="totalamount" style="width: 4cm;" 
+                                              class="mb-0 py-2 font-bold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  
+                                              readonly value="<?php 
+                                                  if(isset($totatalamount)) {
+                                                      echo 'LKR . ' . $totatalamount;
+                                                  } else {
+                                                      echo 'LKR . 0.00';
+                                                  }
+                                              ?>">
+                                      </td>
+
+                                      <td class="p-2 pl-2 ">
+                                          <a class="font-bold text-xs text-left uppercase align-middle">Paid amount :</a>
+                                          <input type="text" id="paidamount" name="paidamount" style="width: 4cm;" 
+                                              class="mb-0 py-2 font-bold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600">
+                                      </td>
+
+                                      <td class="p-2 pl-2 ">
+                                          <a class="font-bold text-left text-xs uppercase align-middle">Change :</a>
+                                          <input type="text" id="change" name="change" style="width: 4cm;" 
+                                              class="mb-0 py-2 font-bold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600" readonly>
+                                      </td>
+
+                                      <!-- Add this script to handle the calculation and LKR prefix -->
+                                      <script>
+                                          document.getElementById('paidamount').addEventListener('input', function () {
+                                              const totalAmountInput = document.getElementById('totalamount');
+                                              const paidAmountInput = document.getElementById('paidamount');
+                                              const changeInput = document.getElementById('change');
+
+                                              // Extract numeric value from total amount (ignoring "LKR .")
+                                              const totalAmount = parseFloat(totalAmountInput.value.replace('LKR .', '').trim()) || 0;
+                                              const paidAmount = parseFloat(paidAmountInput.value.trim()) || 0;
+
+                                              // Calculate change
+                                              const change = paidAmount - totalAmount;
+
+                                              // Update the change field with "LKR" prefix
+                                              changeInput.value = `LKR . ${change >= 0 ? change.toFixed(2) : '0.00'}`;
+                                          });
+                                      </script>
+                                    </tr>
+                                    </form>
+                                  </div>
+                                  
+                                    <tbody>
+                                    </tbody>
+                                </div>
                               </div>
                             </div>
                         </div>
@@ -553,7 +643,10 @@
                 </div>
             </div>
         </div>
-        <footer class="pt-4">
+
+
+
+        <!-- <footer class="pt-0">
         <div class="w-full px-6 mx-auto">
             <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
             <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
@@ -587,14 +680,14 @@
         </div>
         </footer>
     </div>
-      <!-- end cards -->
-    </main>
+      end cards -->
+    <!-- </main>
     <div fixed-plugin>
       <a fixed-plugin-button class="bottom-7.5 right-7.5 text-xl z-990 shadow-soft-lg rounded-circle fixed cursor-pointer bg-white px-4 py-2 text-slate-700">
         <i class="py-2 pointer-events-none fa fa-cog"> </i>
       </a>
-      <!-- -right-90 in loc de 0-->
-      <div fixed-plugin-card class="z-sticky shadow-soft-3xl w-90 ease-soft -right-90 fixed top-0 left-auto flex h-full min-w-0 flex-col break-words rounded-none border-0 bg-white bg-clip-border px-2.5 duration-200">
+      -right-90 in loc de 0-->
+      <!-- <div fixed-plugin-card class="z-sticky shadow-soft-3xl w-90 ease-soft -right-90 fixed top-0 left-auto flex h-full min-w-0 flex-col break-words rounded-none border-0 bg-white bg-clip-border px-2.5 duration-200">
         <div class="px-6 pt-4 pb-0 mb-0 bg-white border-b-0 rounded-t-2xl">
           <div class="float-left">
             <h5 class="mt-4 mb-0">Soft UI Configurator</h5>
@@ -604,13 +697,13 @@
             <button fixed-plugin-close-button class="inline-block p-0 mb-4 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:scale-102 leading-pro text-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 active:opacity-85 text-slate-700">
               <i class="fa fa-close"></i>
             </button>
-          </div>
+          </div> --> 
           <!-- End Toggle Button -->
-        </div>
+        <!-- </div>
         <hr class="h-px mx-0 my-1 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
-        <div class="flex-auto p-6 pt-0 sm:pt-4">
+        <div class="flex-auto p-6 pt-0 sm:pt-4"> -->
           <!-- Sidebar Backgrounds -->
-          <div>
+          <!-- <div>
             <h6 class="mb-0">Sidebar Colors</h6>
           </div>
           <a href="javascript:void(0)">
@@ -622,19 +715,19 @@
               <span class="text-xs rounded-circle h-5.75 mr-1.25 w-5.75 ease-soft-in-out bg-gradient-to-tl from-red-500 to-yellow-400 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color-from="red-500" data-color-to="yellow-400" onclick="sidebarColor(this)"></span>
               <span class="text-xs rounded-circle h-5.75 mr-1.25 w-5.75 ease-soft-in-out bg-gradient-to-tl from-red-600 to-rose-400 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color-from="red-600" data-color-to="rose-400" onclick="sidebarColor(this)"></span>
             </div>
-          </a>
+          </a> -->
           <!-- Sidenav Type -->
-          <div class="mt-4">
+          <!-- <div class="mt-4">
             <h6 class="mb-0">Sidenav Type</h6>
             <p class="leading-normal text-sm">Choose between 2 different sidenav types.</p>
           </div>
           <div class="flex">
             <button transparent-style-btn class="inline-block w-full px-4 py-3 mb-2 font-bold text-center text-white uppercase align-middle transition-all border border-transparent border-solid rounded-lg cursor-pointer xl-max:cursor-not-allowed xl-max:opacity-65 xl-max:pointer-events-none xl-max:bg-gradient-to-tl xl-max:from-purple-700 xl-max:to-pink-500 xl-max:text-white xl-max:border-0 hover:scale-102 hover:shadow-soft-xs active:opacity-85 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-purple-700 to-pink-500 bg-fuchsia-500 hover:border-fuchsia-500" data-class="bg-transparent" active-style>Transparent</button>
             <button white-style-btn class="inline-block w-full px-4 py-3 mb-2 ml-2 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg cursor-pointer xl-max:cursor-not-allowed xl-max:opacity-65 xl-max:pointer-events-none xl-max:bg-gradient-to-tl xl-max:from-purple-700 xl-max:to-pink-500 xl-max:text-white xl-max:border-0 hover:scale-102 hover:shadow-soft-xs active:opacity-85 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 border-fuchsia-500 bg-none text-fuchsia-500 hover:border-fuchsia-500" data-class="bg-white">White</button>
-          </div>
-          <p class="block mt-2 leading-normal text-sm xl:hidden">You can change the sidenav type just on desktop view.</p>
+          </div> -->
+          <!-- <p class="block mt-2 leading-normal text-sm xl:hidden">You can change the sidenav type just on desktop view.</p> -->
           <!-- Navbar Fixed -->
-          <div class="mt-4">
+          <!-- <div class="mt-4">
             <h6 class="mb-0">Navbar Fixed</h6>
           </div>
           <div class="min-h-6 mb-0.5 block pl-0">
@@ -652,13 +745,13 @@
         </div>
       </div>
     </div>
-  </body>
+  </body> -->
   <!-- plugin for charts  -->
   <script src="../assets/js/plugins/chartjs.min.js" async></script>
   <!-- plugin for scrollbar  -->
   <script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
   <!-- github button -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
   <!-- main script file  -->
   <script src="../assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5" async></script>
-</html>
+</html> 
