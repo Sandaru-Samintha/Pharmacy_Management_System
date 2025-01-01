@@ -283,7 +283,7 @@
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="pr-6 mb-0 font-semibold leading-tight text-xs"><?php echo $brandname;?></p>
+                                                        <p class="pr-4 mb-0 font-semibold leading-tight text-xs"><?php echo $brandname;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -302,8 +302,24 @@
                                                         <p class="mb-0 font-semibold leading-tight text-xs"><//?php echo $manufacturedate;?></p>
                                                     </td> -->
 
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $expirydate;?></p>
+                                                    
+                                                      <?php
+                                                        if($expirydate<=date('Y-m-d'))
+                                                        {
+                                                          ?>
+                                                          <td class="p-2 text-center align-middle bg-red-400 border-b whitespace-nowrap shadow-transparent">
+                                                          <p class="mb-0 font-semibold text-black leading-tight text-xs"><?php echo $expirydate;?></p>
+                                                          <?php
+                                                        }
+                                                        else{
+                                                          ?>
+                                                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                          <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $expirydate;?></p>
+                                                          <?php
+                                                        }
+
+                                                      ?>
+                                                        
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">

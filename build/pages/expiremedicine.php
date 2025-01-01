@@ -64,9 +64,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Medicines</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Expired Medicines</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Medicines</h6>
+            <h6 class="mb-0 font-bold capitalize">Expired Medicines</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -197,10 +197,10 @@
 
 
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Medicines Table</h6>
+                        <h6>Expired Medicines Table</h6>
                     </div>
 
-                        <div class="flex-auto px-0 pt-0 pb-0 pr-3">
+                        <div class="flex-auto px-0 pt-0 pb-2 pr-3">
                             <div class="p-0 overflow-x-auto">
                             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                                 <thead class="align-bottom">
@@ -223,7 +223,7 @@
                                 <?php
                                   $currentdate=date('Y-m-d');
 
-                                    $sql = "SELECT * FROM medicines WHERE expirydate >= '$currentdate'";
+                                    $sql = "SELECT * FROM medicines WHERE expirydate <= '$currentdate'";
                                     $result=mysqli_query($connect,$sql);
 
                                     if($result==true)
@@ -251,11 +251,11 @@
                                     
                                                 <tr>
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="pr-2 mb-0 font-semibold leading-tight text-xs"><?php echo $medicinename;?></p>
+                                                        <p class="pr-8 mb-0 font-semibold leading-tight text-xs"><?php echo $medicinename;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="pr-6 mb-0 font-semibold leading-tight text-xs"><?php echo $brandname;?></p>
+                                                        <p class="pr-8 mb-0 font-semibold leading-tight text-xs"><?php echo $brandname;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -274,8 +274,8 @@
                                                         <p class="mb-0 font-semibold leading-tight text-xs"><//?php echo $manufacturedate;?></p>
                                                     </td> -->
 
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $expirydate;?></p>
+                                                    <td class="p-2 text-center bg-red-400 align-middle  border-b whitespace-nowrap shadow-transparent">
+                                                        <p class="mb-0 font-semibold leading-tight text-black text-xs"><?php echo $expirydate;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">

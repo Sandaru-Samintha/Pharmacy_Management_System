@@ -65,9 +65,9 @@
               <li class="leading-normal text-sm">
                 <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Manage Invoice</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Manage Purchase </li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Manage Invoice</h6>
+            <h6 class="mb-0 font-bold capitalize">Manage Purchase</h6>
           </nav>
 
           <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -191,39 +191,11 @@
         <div class="flex flex-wrap-mx-3">
             <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col  min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-2xl rounded-2xl bg-clip-border">
-                    <?php
-                        if(isset($_SESSION['updated'])) 
-                        {
-                            echo $_SESSION['updated'];
-                            unset($_SESSION['updated']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['deletedinvoice'])) 
-                        {
-                            echo $_SESSION['deletedinvoice'];
-                            unset($_SESSION['deletedinvoice']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION['deletefailedinvoice']))
-                        {
-                            echo $_SESSION['deletefailedinvoice'];
-                            unset($_SESSION['deletefailedinvoice']);
-                        }
-                    ?>
-                    <?php
-                        if(isset($_SESSION["successpaid"]))
-                        {
-                        echo $_SESSION["successpaid"];
-                        unset($_SESSION["successpaid"]);
-                        }
-                    ?>
-
+                    
 
 
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0  rounded-2xl">
-                        <h6>Mange Invoice Table</h6>
+                        <h6>Manage Purchase Table</h6>
                     </div>
 
                         <div class="flex-auto px-0 pt-0 pb-0 pr-3">
@@ -231,25 +203,23 @@
                             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                                 <thead class="align-bottom">
                                 <tr>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer Name</th>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Invoice Number</th>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Date</th>
-                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Net Total</th>
-                                    <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Paid Amount</th>
+                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Supplier Name</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Contact NO</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Medicine Name</th>
+                                    <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Bath Number</th>
                                     <!-- <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Manufacture Date</th> -->
-                                    <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Change</th>
-                                    
-                                    <th  colspan="2" class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
+                                    <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Purchase Price</th>
+                                    <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Stoke Quentity</th>
+                                    <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Total Price</th>
+                                    <!-- <th  class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Supplier Name</th> -->
+                                    <th  colspan="3" class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
                                     <!-- <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th> -->
                                 </tr>
                                 </thead>
 
                                 <?php
 
-
-                                    $sql = "SELECT DISTINCT custinvoicenumber, custname, custcurrentdate, totalamount, paidamount, `change` FROM invoices";
-
-
+                                    $sql="SELECT * FROM purchase";
                                     $result=mysqli_query($connect,$sql);
 
                                     if($result==true)
@@ -259,71 +229,92 @@
                                         {
                                             while($row = mysqli_fetch_assoc($result))
                                             {
-                                                $custinvoicenumber=$row['custinvoicenumber'];
-                                                $custname=$row['custname'];
-                                                $custcurrentdate=$row['custcurrentdate'];
-                                                $totalamount=$row['totalamount'];
-                                                $paidamount=$row['paidamount'];
-                                                $change=$row['change'];
+                                                $id=$row["id"];
+                                                $medicinename=$row["medicinename"];
+                                                $batchnumber=$row["batchnumber"];
+                                                $suppliername=$row["suppliername"];
+                                                $quantity=$row["quantity"];
+                                                $purchaseprice=$row["purchaseprice"];
+
+
+                                                $sql2="SELECT SUBSTRING_INDEX($suppliername, ' ', 1) AS firstname,  -- First name
+                                                              SUBSTRING_INDEX($suppliername, ' ', -1) AS lastname ,phone   -- Last name
+                                                        FROM suplliers";
 
                                 ?>
                                                 <tbody>
                                     
                                                 <tr>
-                                                    <td class="p-2 text-center  align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class=" mb-0 font-semibold leading-tight text-xs"><?php echo $custname;?></p>
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                        <p class="pr-2 mb-0 font-semibold leading-tight text-xs"><?php echo $suppliername;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $custinvoicenumber;?></p>
+                                                        <p class="pr-4 mb-0 font-semibold leading-tight text-xs"><?php echo $medicinename;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $custcurrentdate;?></p>
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $batchnumber;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo"LKR . ". $totalamount;?></p>
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $category;?></p>
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo "LKR . ". $paidamount;?></p>
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $medicinetype;?></p>
                                                     </td>
 
                                                     <!-- <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                         <p class="mb-0 font-semibold leading-tight text-xs"><//?php echo $manufacturedate;?></p>
                                                     </td> -->
 
-                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo "LKR . ".$change;?></p>
-                                                    </td>
-
                                                     
+                                                      <?php
+                                                        if($expirydate<=date('Y-m-d'))
+                                                        {
+                                                          ?>
+                                                          <td class="p-2 text-center align-middle bg-red-400 border-b whitespace-nowrap shadow-transparent">
+                                                          <p class="mb-0 font-semibold text-black leading-tight text-xs"><?php echo $expirydate;?></p>
+                                                          <?php
+                                                        }
+                                                        else{
+                                                          ?>
+                                                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                          <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $expirydate;?></p>
+                                                          <?php
+                                                        }
+
+                                                      ?>
+                                                        
+                                                    </td>
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo $quantity;?></p>
+                                                    </td>
+
+                                                    <!-- <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><//?php echo $purchaseprice;?></p>
+                                                    </td> -->
+
+                                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo "LKR"." . ".$sellingprice;?></p>
+                                                    </td>
+
+                                                    <!-- <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><//?php echo $suppliername;?></p>
+                                                    </td> -->
                                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <form action="viewmanageinvoice.php" method="post">
-                                                    <button type="submit" name="view" >
-                                                        <input type="hidden" name="custinvoicenumber" value="<?php echo $custinvoicenumber;?>">
-                                                        <input type="hidden" name="custname" value="<?php echo $custname;?>">
-                                                        <input type="hidden" name="custcurrentdate" value="<?php echo $custcurrentdate ; ?>">
-                                                        <input type="hidden" name="totalamount" value="<?php echo$totalamount;?>">
-                                                        <input type="hidden" name="paidamount" value="<?php echo $paidamount;?>">
-                                                        <a  class="bg-gradient-to-tl from-blue-600 to-cyan-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">View</a>
-                                                    </button>
-                                                    </form>
+                                                    <a href="viewmedicines.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-blue-600 to-cyan-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">View</a>
                                                     </td>
 
 
                                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                    <form action="includes/deletemanageinvoice.php" method="post">
-                                                    <button type="submit" name="delete" >
-                                                        <input type="hidden" name="custinvoicenumber" value="<?php echo $custinvoicenumber;?>">
-                                                        <input type="hidden" name="custcurrentdate" value="<?php echo $custcurrentdate ; ?>">
-                                                        <input type="hidden" name="totalamount" value="<?php echo$totalamount;?>">
-                                                        <input type="hidden" name="paidamount" value="<?php echo $paidamount;?>">
-                                                        <a  class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
-                                                    </button>
-                                                    </form>
-                                                    <!-- <a href="includes/deletemanageinvoice.php?id=</*?php echo $custinvoicenumber;echo $custcurrentdate;echo $paidamount;echo $change;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a> -->
+                                                    <a href="updatemedicines.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline leading-none font-semibold text-white">Update</a>
+                                                    </td>
+
+                                                    <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                                    <a href="includes/deletemedicines.php?id=<?php echo $id;?>" class="bg-gradient-to-tl from-red-600 to-orange-400 px-2 text-xs rounded-1.8 py-2 inline-block whitespace-nowrap text-center align-baseline  leading-none font-semibold text-white">Delete</a>
                                                     </td>
                                                 </tr>
                                                 </tbody>

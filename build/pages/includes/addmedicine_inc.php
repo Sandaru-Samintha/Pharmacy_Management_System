@@ -28,7 +28,12 @@
             exit();
         }
 
+
+        
+
         $sql= "INSERT INTO medicines(medicinename,brandname,batchnumber,medicinetype,category,manufacturedate,expirydate,suppliername,quantity,purchaseprice,sellingprice) VALUES ('$medicinename','$brandname','$batchnumber','$medicinetype','$category','$manufacturedate','$expirydate','$suppliername','$quantity','$purchaseprice','$sellingprice')";
+
+        $sql2= "INSERT INTO purchase(medicinename,batchnumber,suppliername,quantity,purchaseprice) VALUES ('$medicinename','$batchnumber','$suppliername','$quantity','$purchaseprice')";
 
 
         $result=mysqli_query($connect,$sql);

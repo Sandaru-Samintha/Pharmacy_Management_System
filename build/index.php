@@ -315,7 +315,7 @@
 
               <!-- notifications -->
 
-               <li class="relative flex items-center pr-2">
+              <li class="relative flex items-center pr-2">
                 <p class="hidden transform-dropdown-show"></p>
                 <a href="javascript:;" class="block p-0 text-sm transition-all ease-nav-brand text-slate-500" dropdown-trigger aria-expanded="false">
                   <i class="cursor-pointer fa fa-bell"></i>
