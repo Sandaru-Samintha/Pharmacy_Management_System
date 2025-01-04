@@ -35,9 +35,21 @@
             sellingprice='$sellingprice' WHERE id=$id ";
 
 
-        $result=mysqli_query($connect,$sql);
 
-        if($result==true)
+
+        $sql2= "UPDATE purchase SET
+
+            medicinename='$medicinename',
+            batchnumber='$batchnumber',
+            suppliername='$suppliername',
+            quantity='$quantity',
+            purchaseprice='$purchaseprice' WHERE id=$id ";
+
+
+        $result=mysqli_query($connect,$sql);
+        $result2=mysqli_query($connect,$sql2);
+
+        if($result==true && $result2==true)
         {
             $_SESSION["updated"]="<div class='flex justify-center items-center bg-gradient-to-tl from-green-400 to-lime-400 text-white'>Successfully updated the medicine</div>";
             header("Location:../medicines.php");

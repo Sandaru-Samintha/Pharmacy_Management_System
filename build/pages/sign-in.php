@@ -25,9 +25,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-    <title>Soft UI Dashboard Tailwind</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="https://assets.stickpng.com/thumbs/612a32427c7c75000443b276.png" />
+    <link rel="icon" type="image/png" href="https://assets.stickpng.com/thumbs/612a32427c7c75000443b276.png" />
+    <title>Late Pharmacy</title>
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
@@ -52,7 +52,11 @@
           <!-- Navbar --> 
            <nav class="absolute top-0 left-0 right-0 z-30 flex flex-wrap items-center px-4 py-2 mx-6 my-4 shadow-soft-2xl rounded-blur bg-white/80 backdrop-blur-2xl backdrop-saturate-100 lg:flex-nowrap lg:justify-start"> 
             <div class="flex items-center justify-between w-full p-0 pl-6 mx-auto flex-wrap-inherit">
-              <a class="py-2.375 text-xl mr-4 ml-4 whitespace-nowrap font-bold text-slate-700 lg:ml-0" >Late Pharmacy</a> 
+            
+              <a class="py-2.375 text-xl mr-4 ml-4 whitespace-nowrap font-bold text-slate-700 lg:ml-0" >
+              <img src="https://dynamic.design.com/preview/logodraft/3bc74c6c-71e0-4114-a7f8-af9e7bbc86bb/image/large.png" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8 size-25" alt="main_logo" /> 
+              <span class="mb-0 font-bold capitalize">Late Pharmacy</span>
+            </a> 
               <button navbar-trigger class="px-3 py-1 ml-2 leading-none transition-all bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer text-lg ease-soft-in-out lg:hidden" type="button" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="inline-block mt-2 align-middle bg-center bg-no-repeat bg-cover w-6 h-6 bg-none">
                   <span bar1 class="w-5.5 rounded-xs relative my-0 mx-auto block h-px bg-gray-600 transition-all duration-300"></span>
@@ -111,9 +115,8 @@
         <div class="relative flex items-center p-0 overflow-hidden bg-center bg-cover min-h-75-screen">
           <div class="container z-10">
             <div class="flex flex-wrap mt-0 -mx-3">
-            <!-- <a class="py-3 text-xl px-3 mr-4 ml-4  whitespace-nowrap font-bold text-slate-700 lg:ml-0"> Late Pharmacy </a> -->
               <div class="flex flex-col w-full max-w-full px-3 mx-auto md:flex-0 shrink-0 md:w-6/12 lg:w-5/12 xl:w-4/12">
-                <div class="relative flex flex-col min-w-0 mt-32 break-words bg-transparent bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
+            <div class="relative flex flex-col min-w-0 mt-32 break-words bg-transparent bg-white border-0 shadow-soft-2xl rounded-2xl bg-clip-border">
                 <?php
                     
                     if(isset($_SESSION["success"]))
@@ -137,13 +140,7 @@
                       unset($_SESSION["invalidpassword"]);
                     }
                   ?>
-                  <?php
-                    if(isset($_SESSION["loggedsuccess"]))
-                    {
-                      echo $_SESSION["loggedsuccess"];
-                      unset($_SESSION["loggedsuccess"]);
-                    }
-                  ?>
+                  
                   <?php
                     if(isset($_SESSION["invalideusername"]))
                     {
@@ -155,8 +152,6 @@
                     <h3 class="relative z-10 font-bold text-transparent bg-gradient-to-tl from-blue-600 to-cyan-400 bg-clip-text">Welcome back</h3>
                     <p class="mb-0">Enter your user name and password to sign in</p>
                   </div>
-                <!-- <div class="bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border"> -->
-                <!-- <div class="p-6 mb-0 text-center bg-white border-b-0 rounded-t-2xl"> -->
                   <div class="flex-auto p-6">
                     <form action="includes/login_inc.php" method="post" >
                       <label class="mb-2 ml-1 font-bold text-xs text-slate-700">User Name</label>
@@ -167,10 +162,6 @@
                       <div class="mb-4">
                         <input type="password" name="password" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shadow" placeholder="Password" />
                       </div>
-                      <!-- <div class="min-h-6 mb-0.5 block pl-12">
-                        <input id="rememberMe" class="mt-0.54 rounded-10 duration-250 ease-soft-in-out after:rounded-circle after:shadow-soft-2xl after:duration-250 checked:after:translate-x-5.25 h-5 relative float-left -ml-12 w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-slate-800/95 checked:bg-slate-800/95 checked:bg-none checked:bg-right" type="checkbox" checked="" />
-                        <label class="mb-2 ml-1 font-normal cursor-pointer select-none text-sm text-slate-700" for="rememberMe">Remember me</label>
-                      </div> -->
                       <div class="text-center">
                         <button type="submit" name="submit" class="inline-block w-full px-6 py-3 mt-6 mb-0 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-blue-600 to-cyan-400 hover:scale-102 hover:shadow-soft-xs active:opacity-85">Sign in</button>
                       </div>
@@ -191,8 +182,8 @@
                     </div>
                     <!-- <div class="absolute w-full h-full bg-cover" style="background-image: url('https://media.istockphoto.com/id/1160957755/photo/i-sold-so-many-of-this-today.jpg?s=612x612&w=0&k=20&c=cjIxQ90ewlSx1EYQ0ELX1AgMDX4enfDHCnZl5vMHtFI=');">
                     </div>
-                    <div class="absolute w-full h-full bg-cover" style="background-image: url('https://media.istockphoto.com/id/471085796/photo/smiling-pharmacist-mixing-a-medicine.jpg?s=612x612&w=0&k=20&c=bTw_JspFYnazwmQqh9hd4KTeeBhhTTN1tNBBTzDGvT4=');">
-                    </div> -->
+                    <div class="absolute w-full h-full bg-cover" style="background-image: url('https://media.istockphoto.com/id/471085796/photo/smiling-pharmacist-mixing-a-medicine.jpg?s=612x612&w=0&k=20&c=bTw_JspFYnazwmQqh9hd4KTeeBhhTTN1tNBBTzDGvT4=');">-->
+                    </div> 
                   </div>
                 </div>
               </div>

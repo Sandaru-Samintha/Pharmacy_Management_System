@@ -16,6 +16,7 @@
         $quantity=$_POST["quantity"];
         $purchaseprice=$_POST["purchaseprice"];
         $sellingprice=$_POST["sellingprice"];
+        $purchdate=date("Y-m-d");
 
         
 
@@ -33,12 +34,13 @@
 
         $sql= "INSERT INTO medicines(medicinename,brandname,batchnumber,medicinetype,category,manufacturedate,expirydate,suppliername,quantity,purchaseprice,sellingprice) VALUES ('$medicinename','$brandname','$batchnumber','$medicinetype','$category','$manufacturedate','$expirydate','$suppliername','$quantity','$purchaseprice','$sellingprice')";
 
-        $sql2= "INSERT INTO purchase(medicinename,batchnumber,suppliername,quantity,purchaseprice) VALUES ('$medicinename','$batchnumber','$suppliername','$quantity','$purchaseprice')";
+        $sql2= "INSERT INTO purchase(medicinename,batchnumber,suppliername,quantity,purchaseprice,purchdate) VALUES ('$medicinename','$batchnumber','$suppliername','$quantity','$purchaseprice','$purchdate')";
 
 
         $result=mysqli_query($connect,$sql);
+        $result2=mysqli_query($connect,$sql2);
 
-        if($result==true)
+        if($result==true &&$result2==true)
         {
             $_SESSION["success"]="<div class='flex justify-center items-center bg-gradient-to-tl from-green-400 to-lime-400 text-white'>Successfully added the medicine</div>";
             header("Location:../medicines.php");
