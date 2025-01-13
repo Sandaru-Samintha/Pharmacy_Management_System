@@ -3,7 +3,7 @@
       <div class="h-19.5">
         <i class="absolute top-0 right-0 hidden p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 xl:hidden" sidenav-close></i>
         <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700"  target="_blank">
-         <img src="https://cdn.freebiesupply.com/logos/large/2x/lp-4-logo-png-transparent.png" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" /> 
+         <img src="https://e7.pngegg.com/pngimages/841/884/png-clipart-linkin-park-the-hunting-party-tour-logo-musical-ensemble-lynyrd-skynyrd-miscellaneous-album-thumbnail.png" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" /> 
           <span class="mb-0 font-bold capitalize">LATE PHARMACY</span>
         </a>
       </div>

@@ -25,8 +25,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="https://assets.stickpng.com/thumbs/612a32427c7c75000443b276.png" />
-    <link rel="icon" type="image/png" href="https://assets.stickpng.com/thumbs/612a32427c7c75000443b276.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://e7.pngegg.com/pngimages/841/884/png-clipart-linkin-park-the-hunting-party-tour-logo-musical-ensemble-lynyrd-skynyrd-miscellaneous-album-thumbnail.png" />
+    <link rel="icon" type="image/png" href="https://e7.pngegg.com/pngimages/841/884/png-clipart-linkin-park-the-hunting-party-tour-logo-musical-ensemble-lynyrd-skynyrd-miscellaneous-album-thumbnail.png" />
     <title>Late Pharmacy</title>
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -54,7 +54,7 @@
             <div class="flex items-center justify-between w-full p-0 pl-6 mx-auto flex-wrap-inherit">
             
               <a class="py-2.375 text-xl mr-4 ml-4 whitespace-nowrap font-bold text-slate-700 lg:ml-0" >
-              <img src="https://dynamic.design.com/preview/logodraft/3bc74c6c-71e0-4114-a7f8-af9e7bbc86bb/image/large.png" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8 size-25" alt="main_logo" /> 
+              <img src="https://e7.pngegg.com/pngimages/841/884/png-clipart-linkin-park-the-hunting-party-tour-logo-musical-ensemble-lynyrd-skynyrd-miscellaneous-album-thumbnail.png" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8 size-25" alt="main_logo" /> 
               <span class="mb-0 font-bold capitalize">Late Pharmacy</span>
             </a> 
               <button navbar-trigger class="px-3 py-1 ml-2 leading-none transition-all bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer text-lg ease-soft-in-out lg:hidden" type="button" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,10 +142,10 @@
                   ?>
                   
                   <?php
-                    if(isset($_SESSION["invalideusername"]))
+                    if(isset($_SESSION["invalideusname"]))
                     {
-                      echo $_SESSION["invalideusername"];
-                      unset($_SESSION["invalideusername"]);
+                      echo $_SESSION["invalideusname"];
+                      unset($_SESSION["invalideusname"]);
                     }
                   ?>
                   <div class="p-6 pb-0 mb-0 bg-transparent border-b-0 rounded-t-2xl ">

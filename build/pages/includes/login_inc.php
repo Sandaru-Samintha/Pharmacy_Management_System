@@ -47,9 +47,9 @@
                                 header("Location:../dashboard.php?success=username=".$username);
 
                             }
-                            else
+                            else if(!($susername==$username ))
                             {
-                                $_SESSION["invalideusername"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalid username, try again..!</div>";
+                                $_SESSION["invalideusname"]="<div class='flex justify-center items-center bg-gradient-to-tl from-red-600 to-yellow-400 text-white'>Invalid username, try again..!</div>";
                                 header("Location:../sign-in.php?error=badlogin");
                             }
                         }
