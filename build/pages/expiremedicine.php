@@ -64,9 +64,9 @@
               
                 <a class="text-white opacity-50" href="javascript:;">Pages</a>
               </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:content-['/'] text-white before:text-white" aria-current="page">Expired Medicine</li>
+              <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:content-['/'] text-white before:text-white" aria-current="page">Expired Medicines</li>
             </ol>
-            <h6 class="mb-0 font-bold text-white capitalize">Expired Medicine</h6>
+            <h6 class="mb-0 font-bold text-white capitalize">Expired Medicines</h6>
           </nav>
       
           
