@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # [Soft UI Dashboard Tailwind](http://demos.creative-tim.com/soft-ui-dashboard-tailwind/pages/dashboard.html?ref=readme-sudt) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://www.creative-tim.com/product/soft-ui-dashboard-tailwind&text=Check%20Soft%20UI%20Dashboard%20Tailwind%20made%20by%20@CreativeTim%20#webdesign%20#dashboard%20#softdesign%20#html%20https://www.creative-tim.com/product/soft-ui-dashboard-tailwind) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/FhCJCaHdQa)
 
 ![version](https://img.shields.io/badge/version-1.0.5-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/soft-ui-dashboard-tailwind.svg)](https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/soft-ui-dashboard-tailwind.svg)](https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/issues?q=is%3Aissue+is%3Aclosed)
@@ -177,3 +178,6 @@ Dribbble: <https://dribbble.com/creativetim>
 Instagram: <https://instagram.com/creativetimofficial>
 
 TikTok: <https://tiktok.com/@creative.tim>
+=======
+# Pharmacy_Management_System
+>>>>>>> 6e96a2e0bf5e3e5899ed5301f3162604a2c44c8e
