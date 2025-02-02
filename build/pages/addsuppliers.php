@@ -87,7 +87,7 @@
               </g>
             </svg>
           </div>
-          <span class="ml-1 duration-300 opacity-60 pointer-events-none ease-soft">Dashboard</span>
+          <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Dashboard</span>
         </a>
       </li>
 
@@ -146,7 +146,7 @@
 
 
           <li class="w-full mt-4">
-            <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">Pharmacy</h6>
+            <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-100">Pharmacy</h6>
           </li>
 
 
@@ -219,7 +219,7 @@
 
 
           <li class="w-full mt-4">
-            <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">Suppliers</h6>
+            <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-100">Suppliers</h6>
           </li>
 
          
@@ -242,7 +242,7 @@
                   </g>
                 </svg>
               </div>
-              <span class="ml-1 duration-300 opacity-60 pointer-events-none ease-soft">Add Suppliers</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Add Suppliers</span>
             </a>
           </li>
 
@@ -280,7 +280,7 @@
 
 
           <li class="w-full mt-4">
-            <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">Invoice</h6>
+            <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-100">Invoice</h6>
           </li>
 
           <li class="mt-0.5 w-full">
