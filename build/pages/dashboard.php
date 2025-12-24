@@ -34,7 +34,65 @@
   $result_monthly_purchases = mysqli_query($connect, $sql_monthly_purchases);
   while ($row = mysqli_fetch_assoc($result_monthly_purchases)) {
     $monthly_purchases[$row['month']] = $row['purchases'];
-  }
+
+}
+//Today's sales
+$sql_today_sales = "
+    SELECT SUM(totalamount) AS today_sales 
+    FROM invoices 
+    WHERE custcurrentdate >= CURDATE() 
+      AND custcurrentdate < CURDATE() + INTERVAL 1 DAY
+";
+
+$result_today_sales = mysqli_query($connect, $sql_today_sales);
+if ($result_today_sales) {
+    $row_today_sales = mysqli_fetch_assoc($result_today_sales);
+    $today_sales = $row_today_sales['today_sales'] ?? 0;
+} else {
+    $today_sales = 0;
+}
+
+//Today’s Purchase
+$sql_today_purchase = "
+    SELECT SUM(quantity * purchaseprice) AS today_purchase 
+    FROM purchase 
+    WHERE purchdate >= CURDATE() 
+      AND purchdate < CURDATE() + INTERVAL 1 DAY
+";
+
+$result_today_purchase = mysqli_query($connect, $sql_today_purchase);
+if ($result_today_purchase) {
+    $row_today_purchase = mysqli_fetch_assoc($result_today_purchase);
+    $today_purchase = $row_today_purchase['today_purchase'] ?? 0;
+} else {
+    $today_purchase = 0;
+}
+        
+  
+
+// Expiring soon medicines
+$sql_expiring = "SELECT medicinename, expirydate 
+                FROM medicines 
+                WHERE expirydate BETWEEN CURDATE() 
+                AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+                ORDER BY expirydate ASC 
+                LIMIT 5";
+
+$result_expiring = mysqli_query($connect, $sql_expiring);
+
+$expiring_medicines = [];
+while ($row = mysqli_fetch_assoc($result_expiring)) {
+    $expiring_medicines[] = $row;
+}
+
+
+// Low stock medicines
+$sql_low_stock = "SELECT medicinename, quantity FROM medicines WHERE quantity <= 10 ORDER BY quantity ASC LIMIT 5";
+$result_low_stock = mysqli_query($connect, $sql_low_stock);
+$low_stock_medicines = [];
+while ($row = mysqli_fetch_assoc($result_low_stock)) {
+    $low_stock_medicines[] = $row;
+}
   
 ?>
 
@@ -72,6 +130,8 @@
     <!-- Main Styling -->
     <link href="../assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+
 
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
@@ -465,7 +525,7 @@
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-black dark:opacity-60">Suppliers</p>
-                      <h5 class="mb-2 font-bold dark:text-orange-600 text-orange-500">
+                      <h5 class="mb-2 font-bold dark:text-gray-600 text-gray-500">
                       <?php 
                       if(isset($_SESSION["totalsuppliers"]))
                       {
@@ -480,7 +540,7 @@
                     </div>
                   </div>
                   <div class="px-3 text-right basis-1/3">
-                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
+                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-gray-600 to-gray-500">
                       <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
                     </div>
                   </div>
@@ -550,124 +610,208 @@
             </div>
           </div>
         </div>
+<!-- ================= ROW 2 : QUICK ACTIONS + TODAY SALES ================= -->
+<div class="flex flex-wrap mt-6 -mx-3 items-start">
 
-        <!-- cards row 2 -->
-        <div class="flex flex-wrap mt-6 -mx-3">
-          <div class="w-full max-w-full px-3 mt-0 lg:w-7/12 lg:flex-none">
-            <div class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
-              <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
-                <h6 class="capitalize dark:text-black">Monthly Overview</h6>
-                <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
-                  <i class="fa fa-arrow-up text-emerald-500"></i>
-                  <span class="font-semibold">Sales: LKR <?php echo number_format($yearly_sales, 2); ?> | Purchases: LKR <?php echo number_format($yearly_purchases, 2); ?></span> this year
-                </p>
-              </div>
-              <div class="flex-auto p-4">
-                <div>
-                  <canvas id="chart-line" height="300"></canvas>
-                </div>
-              </div>
-              <script>
-                var ctx2 = document.getElementById("chart-line").getContext("2d");
+  <div class="w-full xl:w-3/6 px-3 mb-6">
+    <div class="flex flex-wrap gap-4">
+      <a href="newinvoice.php" class="bg-white shadow-xl rounded-2xl px-6 py-3 text-sm font-semibold">
+        ➕ New Invoice
+      </a>
+      <a href="addmedicine.php" class="bg-white shadow-xl rounded-2xl px-6 py-3 text-sm font-semibold">
+        💊 Add Medicine
+      </a>
+      <a href="addcustomers.php" class="bg-white shadow-xl rounded-2xl px-6 py-3 text-sm font-semibold">
+        👤 Add Customer
+      </a>
+    </div>
+  </div>
 
-                var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-                gradientStroke1.addColorStop(1, "rgba(203,12,159,0.2)");
-                gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
-                gradientStroke1.addColorStop(0, "rgba(203,12,159,0)");
+  <!-- Today Sales Card -->
+  <div class="w-full sm:w-1/2 xl:w-1/4 px-3 mb-6">
+    <div class="bg-white shadow-xl rounded-2xl p-4 flex flex-col">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="mb-0 text-sm font-semibold uppercase text-gray-500">Today Sales</p>
+          <h5 class="mb-0 font-bold text-blue-600"><?php echo number_format($today_sales, 2); ?></h5>
+        </div>
+        <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-tl from-blue-500 to-violet-500">
+          <i class="ni ni-money-coins text-white text-lg"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-                gradientStroke2.addColorStop(1, "rgba(20,23,39,0.2)");
-                gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
-                gradientStroke2.addColorStop(0, "rgba(20,23,39,0)");
+  <!-- Today Purchase Card -->
+  <div class="w-full sm:w-1/2 xl:w-1/4 px-3 mb-6">
+    <div class="bg-white shadow-xl rounded-2xl p-4 flex flex-col">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="mb-0 text-sm font-semibold uppercase text-gray-500">Today Purchase</p>
+          <h5 class="mb-0 font-bold text-red-500"><?php echo number_format($today_purchase, 2); ?></h5>
+        </div>
+        <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-tl from-red-500 to-orange-700">
+          <i class="ni ni-money-coins text-white text-lg"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                new Chart(ctx2, {
-                  type: "line",
-                  data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    datasets: [
-                      {
-                        label: "Invoices Price",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#cb0c9f",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke1,
-                        fill: true,
-                        data: [<?php echo implode(',', $monthly_sales); ?>],
-                        maxBarThickness: 6,
-                      },
-                      {
-                        label: "Purchases Price",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#3A416F",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke2,
-                        fill: true,
-                        data: [<?php echo implode(',', $monthly_purchases); ?>],
-                        maxBarThickness: 6,
-                      },
-                    ],
-                  },
-                  options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: {
-                        display: true,
-                      },
-                    },
-                    interaction: {
-                      intersect: false,
-                      mode: "index",
-                    },
-                    scales: {
-                      y: {
-                        grid: {
-                          drawBorder: false,
-                          display: true,
-                          drawOnChartArea: true,
-                          drawTicks: false,
-                        },
-                        ticks: {
-                          display: true,
-                          padding: 10,
-                          color: "#b2b9bf",
-                          font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: "normal",
-                            lineHeight: 2,
-                          },
-                        },
-                      },
-                      x: {
-                        grid: {
-                          drawBorder: false,
-                          display: false,
-                          drawOnChartArea: false,
-                          drawTicks: false,
-                        },
-                        ticks: {
-                          display: true,
-                          color: "#b2b9bf",
-                          padding: 20,
-                          font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: "normal",
-                            lineHeight: 2,
-                          },
-                        },
-                      },
-                    },
-                  },
-                });
-              </script>
-            </div>
-          </div>
+
+
+  <!-- Quick Action Buttons (LEFT – WIDE) -->
+  
+
+</div>
+
+<!-- ================= ROW 3 : LOW STOCK + EXPIRING MEDICINES ================= -->
+<div class="flex flex-wrap mt-6 -mx-3">
+
+  <!-- Low Stock Medicines -->
+  <div class="w-full xl:w-1/2 px-3 mb-6">
+    <div class="bg-white shadow-xl rounded-2xl p-4">
+      <h6 class="font-bold mb-4">Low Stock Medicines</h6>
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b">
+            <th class="text-left pb-2">Medicine</th>
+            <th class="text-left pb-2">Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $low_stock = mysqli_query($connect,
+            "SELECT medicinename, quantity FROM medicines 
+             WHERE quantity <= 10 
+             ORDER BY quantity ASC 
+             LIMIT 5"
+          );
+
+          if (mysqli_num_rows($low_stock) > 0) {
+            while ($row = mysqli_fetch_assoc($low_stock)) {
+          ?>
+            <tr class="border-b">
+              <td class="py-2"><?php echo $row['medicinename']; ?></td>
+              <td class="py-2 font-bold"><?php echo $row['quantity']; ?></td>
+            </tr>
+          <?php
+            }
+          } else {
+          ?>
+            <tr>
+              <td colspan="2" class="py-2 text-gray-400">
+                All medicines are sufficiently stocked
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Expiring Soon Medicines -->
+  <div class="w-full xl:w-1/2 px-3 mb-6">
+    <div class="bg-white shadow-xl rounded-2xl p-4">
+      <h6 class="font-bold mb-4">Medicines Expiring Soon</h6>
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b">
+            <th class="text-left pb-2">Medicine</th>
+            <th class="text-left pb-2">Expiry Date</th>
+            <th class="text-left pb-2">Days Left</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (!empty($expiring_medicines)) { ?>
+            <?php foreach ($expiring_medicines as $row) { 
+              $days_left = floor((strtotime($row['expirydate']) - time()) / 86400);
+            ?>
+              <tr class="border-b">
+                <td class="py-2"><?php echo $row['medicinename']; ?></td>
+                <td class="py-2 font-semibold text-red-500">
+                  <?php echo date("d M Y", strtotime($row['expirydate'])); ?>
+                </td>
+                <td class="py-2">
+                  <?php echo $days_left . " days"; ?>
+                </td>
+              </tr>
+            <?php } ?>
+          <?php } else { ?>
+            <tr>
+              <td colspan="3" class="py-2 text-gray-400">
+                No medicines expiring soon
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- ================= ROW 4 : MONTHLY CHART ================= -->
+<div class="flex flex-wrap -mx-3 mt-6">
+  <div class="w-full px-3">
+    <div class="bg-white shadow-xl rounded-2xl p-4">
+      <h6 class="font-bold mb-3">Monthly Sales & Purchases</h6>
+      <canvas id="chart" height="100"></canvas>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+new Chart(document.getElementById("chart"), {
+  type: "line",
+  data: {
+    labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+    datasets: [
+      {
+        label: "Sales",
+        data: <?php echo json_encode(array_values($monthly_sales)); ?>,
+        borderColor: "#3b82f6",        // Blue
+        backgroundColor: "rgba(59,130,246,0.2)",
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: "#3b82f6"
+      },
+      {
+        label: "Purchases",
+        data: <?php echo json_encode(array_values($monthly_purchases)); ?>,
+        borderColor: "#ef4444",        // Red
+        backgroundColor: "rgba(239,68,68,0.2)",
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: "#ef4444"
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top"
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
+
+
+
+
+
 
 
     <footer class="bg-[#0f172a] text-gray-300 mt-10">
