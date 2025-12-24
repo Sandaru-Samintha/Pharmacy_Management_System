@@ -756,14 +756,15 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
 <div class="flex flex-wrap -mx-3 mt-6">
   <div class="w-full px-3">
     <div class="bg-white shadow-xl rounded-2xl p-4">
-      <h6 class="font-bold mb-3">Monthly Sales & Purchases</h6>
+      <!-- Chart Title with Current Year -->
+      <h6 class="font-bold mb-3">Monthly Sales & Purchases – <?php echo date("Y"); ?></h6>
       <canvas id="chart" height="100"></canvas>
     </div>
   </div>
 </div>
 
-</div>
-
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 new Chart(document.getElementById("chart"), {
   type: "line",
@@ -807,6 +808,7 @@ new Chart(document.getElementById("chart"), {
   }
 });
 </script>
+
 
 
 
