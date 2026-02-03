@@ -19,6 +19,13 @@
   $result_yearly_sales = mysqli_query($connect, $sql_yearly_sales);
   $row_yearly_sales = mysqli_fetch_assoc($result_yearly_sales);
   $yearly_sales = $row_yearly_sales['yearly_sales'] ? $row_yearly_sales['yearly_sales'] : 0;
+
+
+  // Query to get total suppliers
+$sql_suppliers = "SELECT COUNT(*) as total_suppliers FROM suppliers";
+$result_suppliers = mysqli_query($connect, $sql_suppliers);
+$row_suppliers = mysqli_fetch_assoc($result_suppliers);
+$total_suppliers = $row_suppliers['total_suppliers'] ? $row_suppliers['total_suppliers'] : 0;
   
   // Query to get monthly sales for chart
   $monthly_sales = array_fill(1, 12, 0);
@@ -496,10 +503,10 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-black dark:opacity-60">Purchase</p>
                       <h5 class="mb-2 font-bold text-blue-600">
                       <?php 
-                      if(isset($_SESSION["totalpurchase"]))
+                      if(isset($yearly_purchases))
                       {
                         
-                        echo number_format($yearly_purchases, 2);
+                        echo "Rs." . number_format($yearly_purchases, 2);
                         
                       } 
                       ?>
@@ -527,10 +534,10 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-black dark:opacity-60">Suppliers</p>
                       <h5 class="mb-2 font-bold dark:text-gray-600 text-gray-500">
                       <?php 
-                      if(isset($_SESSION["totalsuppliers"]))
+                      if(isset($total_suppliers))
                       {
                         
-                        echo "+".$_SESSION["totalsuppliers"];
+                        echo "+" . $total_suppliers; 
                         
                         
                       } 
@@ -559,10 +566,10 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-black dark:opacity-60">Customers</p>
                       <h5 class="mb-2 font-bold text-emerald-500">
                       <?php 
-                      if(isset($_SESSION["totalcustomer"]))
+                      if(isset($total_customers))
                       {
                         
-                        echo "+".$_SESSION["totalcustomer"];
+                        echo "+" . $total_customers;
                         
                         
                       }
@@ -590,10 +597,10 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-black dark:opacity-60">Invoice Price</p>
                       <h5 class="mb-2 font-bold text-yellow-500">
                       <?php 
-                      if(isset($_SESSION["totalsales"]))
+                      if(isset($yearly_sales))
                       {
                         
-                        echo number_format($yearly_sales, 2);
+                        echo "Rs.". number_format($yearly_sales, 2);
                         
                       } 
                       ?>
@@ -633,7 +640,7 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
       <div class="flex justify-between items-center">
         <div>
           <p class="mb-0 text-sm font-semibold uppercase text-gray-500">Today Sales</p>
-          <h5 class="mb-0 font-bold text-blue-600"><?php echo number_format($today_sales, 2); ?></h5>
+          <h5 class="mb-0 font-bold text-blue-600"><?php echo "Rs.". number_format($today_sales, 2); ?></h5>
         </div>
         <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-tl from-blue-500 to-violet-500">
           <i class="ni ni-money-coins text-white text-lg"></i>
@@ -648,7 +655,7 @@ while ($row = mysqli_fetch_assoc($result_low_stock)) {
       <div class="flex justify-between items-center">
         <div>
           <p class="mb-0 text-sm font-semibold uppercase text-gray-500">Today Purchase</p>
-          <h5 class="mb-0 font-bold text-red-500"><?php echo number_format($today_purchase, 2); ?></h5>
+          <h5 class="mb-0 font-bold text-red-500"><?php echo "Rs.".number_format($today_purchase, 2); ?></h5>
         </div>
         <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-tl from-red-500 to-orange-700">
           <i class="ni ni-money-coins text-white text-lg"></i>

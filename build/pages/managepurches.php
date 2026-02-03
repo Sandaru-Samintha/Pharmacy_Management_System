@@ -482,7 +482,7 @@
                                                     </td>
 
                                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo "LKR . ". $total;?></p>
+                                                        <p class="mb-0 font-semibold leading-tight text-xs"><?php echo "LKR . ". number_format($total,2) ;?></p>
                                                     </td>
 
                                                   
@@ -506,7 +506,7 @@
                                                   <td></td>
                                                   <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-slate-300 border-b border-gray-200 shadow-none text-xs border-b-solid tracking-none whitespace-nowrap text-black ">Net Total </th>
                                                   <td class="p-2 text-center align-middle bg-slate-300  border-b whitespace-nowrap shadow-transparent">
-                                                        <p class="mb-0  leading-tight font-bold text-xs text-black"><?php $_SESSION["totalpurchase"]=$nettotal; echo"LKR . " .$nettotal; ?></p>
+                                                        <p class="mb-0  leading-tight font-bold text-xs text-black"><?php $_SESSION["totalpurchase"]=($nettotal ?? 0); echo "LKR . ".number_format($nettotal ?? 0,2); ?></p>
                                                     </td>
                                                 </tr>
                                                 </tbody>

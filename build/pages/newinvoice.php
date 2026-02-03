@@ -708,7 +708,7 @@
                                                 
                                                 if(isset($totatalamount))
                                                 {
-                                                  echo "LKR . " .$totatalamount ;
+                                                  echo "LKR . " .number_format($totatalamount,2) ;
                                                 }
                                                 elseif(!isset($totatalamount))
                                                 {
@@ -755,7 +755,7 @@
                                       </td>
                                       
                                       <td class="p-2 pl-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                          <input type="text" name="invtotal" value="<?php echo isset($_SESSION['total']) ?"LKR . ".$_SESSION['total']: ''; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly>
+                                          <input type="text" name="invtotal" value="<?php echo isset($_SESSION['total']) ?"LKR . ".number_format($_SESSION['total'],2) : ''; ?>"style="width: 3cm;" class="mb-0 py-2 font-semibold text-center leading-tight text-xs text-black px-1 bg-slate-200 border border-gray-600" readonly>
                                       </td>
 
                                       <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
@@ -782,7 +782,7 @@
                                       <td>
                                       <div class="flex flex-row-reverse p-3 mr-3">
                                                     <div class="flex-initial ">
-                                                        <button type="submit" name="submit"  class="flex space-x-2 flex items-center px-5 py-2 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
+                                                        <button type="submit" name="submit"  class="flex space-x-2  items-center px-5 py-2 font-medium tarnking-wide text-white capitalize bg-gradient-to-tl from-green-600 to-lime-400 rounded-md">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" class="size-6" >
                                                         <path fill-rule="evenodd" d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z" clip-rule="evenodd" />
                                                         </svg>
@@ -803,7 +803,7 @@
                                               class="mb-0 py-2 font-bold text-center leading-tight text-xs text-black px-2 bg-slate-200 border border-gray-600"  
                                               readonly value="<?php 
                                                   if(isset($totatalamount)) {
-                                                      echo 'LKR . ' . $totatalamount;
+                                                      echo 'LKR . ' . $totatalamount ;
                                                   } else {
                                                       echo 'LKR . 0.00';
                                                   }
@@ -837,7 +837,7 @@
                                               const change = paidAmount - totalAmount;
 
                                               // Update the change field with "LKR" prefix
-                                              changeInput.value = `LKR . ${change >= 0 ? change.toFixed(2) : '0.00'}`;
+                                              changeInput.value = `LKR .  ${change >= 0 ?  change.toFixed(2) : '0.00'}`;
                                           });
                                       </script>
                                     </tr>
